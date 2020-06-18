@@ -44,12 +44,12 @@
             <li class="nav-item  <%if (currentNav == "cabinet") {
                     out.print(" active ");
                 }%> ">
-                <a class="nav-link" href="<%=DataUtils.PATH%>MyCabinet">Профиль <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="MyCabinet">Профиль <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item <%if (currentNav == "orders") {
                     out.print(" active ");
                 }%>">
-                <a class="nav-link" href="<%=DataUtils.PATH%>Orders">Заказы</a>
+                <a class="nav-link" href="Orders">Заказы</a>
             </li>
             <li class="nav-item <%if (currentNav == "mavens") {
                     out.print(" active ");
@@ -67,17 +67,17 @@
         <div class="form-inline my-2 my-lg-0">
             <% if (person == null) {%>
             <% if (currentNav != "login") {%>
-            <a href="<%=DataUtils.PATH%>Login" class="btn btn-outline-secondary" role="button" aria-pressed="true">Войти</a>
+            <a href="Login" class="btn btn-outline-secondary" role="button" aria-pressed="true">Войти</a>
             <% } %>
             <% if (currentNav != "signup") {%>
 
-            <a href="<%=DataUtils.PATH%>Signup" style="margin-left: 4px;" class="btn btn-outline-secondary" role="button" aria-pressed="true">Зарегистрироваться</a>
+            <a href="Signup" style="margin-left: 4px;" class="btn btn-outline-secondary" role="button" aria-pressed="true">Зарегистрироваться</a>
 
             <% }%>
             <% }
 
             else {%>
-            <a href="<%=DataUtils.PATH%>Logout" class="btn btn-outline-secondary" role="button" aria-pressed="true">Выйти</a>
+            <a href="Logout" class="btn btn-outline-secondary" role="button" aria-pressed="true">Выйти</a>
 
             <%}%>
         </div>
