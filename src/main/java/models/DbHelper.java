@@ -17,14 +17,14 @@ import javax.servlet.http.*;
  */
 public class DbHelper {
 
-   private static final String URL = "jdbc:mysql://localhost:3306/mydb?useSSL=false";
+  /* private static final String URL = "jdbc:mysql://localhost:3306/mydb?useSSL=false";
     private static final String DBUSER = "root";
-    private static final String DBPASSWORD = "1q2w3e4r";
+    private static final String DBPASSWORD = "1q2w3e4r";*/
     
     
-    /* private static final String URL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com/etujrbvqopdq3qke?sslmode=require";
+    private static final String URL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com/etujrbvqopdq3qke?sslmode=require";
     private static final String DBUSER = "qyjw14jf9r663zjx";
-    private static final String DBPASSWORD = "fgzp7rabhni4a09o";*/
+    private static final String DBPASSWORD = "fgzp7rabhni4a09o";
     
     
 
