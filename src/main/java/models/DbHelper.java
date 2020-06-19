@@ -2207,6 +2207,32 @@ where executernservices.executorid = executorid
             sqlEx.printStackTrace();
         }
         return null;
+    }  
+    
+    
+    public ArrayList<Message> getAllMesages(){
+      String query = "select * from messages ";
+
+      ArrayList<Message> result = new ArrayList();
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            if (rs.next()) {
+                   int id = rs.getInt("msg_id");
+                int personId = rs.getInt("person_id1");
+                  int who = rs.getInt("person_id2");
+                String text = rs.getString("text");
+                Message msg = new Message(id, personId, who, text);
+                result.add(msg);
+            }
+            return result;
+        } catch (Exception sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        return null;
     }
+    
     //</editor-fold>
 }

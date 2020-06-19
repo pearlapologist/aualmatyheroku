@@ -7,10 +7,13 @@ package test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.*;
 
 /**
  *
@@ -30,18 +33,33 @@ public class GetAllMessages extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetAllMessages</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetAllMessages at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+      DbHelper db = new models.DbHelper();
+      ArrayList<Message> messages=  db.getAllMesages();
+      
+  
+        if(messages == null){
+           javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder().add("errorMessage", "404error");
+            String result = objectBuilder.build().toString();
+            out.print(result);
+            return;
         }
+        
+        JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder();
+        
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        
+        for(Message g : messages){
+        JsonObjectBuilder oB2 = javax.json.Json.createObjectBuilder().add("msg_id", g.getId())
+        .add("person_id1", g.getPersonId()).add("person_id2", g.getWhosends())
+                .add("text", g.getText());
+       
+            arrayBuilder.add(oB2);
+        }
+        
+          objectBuilder.add("messages", arrayBuilder);
+           javax.json.JsonObject jsonObject = objectBuilder.build();
+           out.print(jsonObject.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -54,7 +54,7 @@ public class GetMessageById extends HttpServlet {
          JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
           objectBuilder.add("msg_id", message.getId());
            objectBuilder.add("person_id1", message.getPersonId());
-            objectBuilder.add("person_id22", message.getWhosends());
+            objectBuilder.add("person_id2", message.getWhosends());
            objectBuilder.add("text", message.getText());
            
            JsonObject jsonObject = objectBuilder.build();

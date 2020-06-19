@@ -22,6 +22,7 @@ test\AddMessage.class
 models\Answer.class
 controllers\Profile.class
 controllers\Result.class
+test\GetAllMessages.class
 controllers\auth\Signup.class
 models\Section.class
 models\Response.class

@@ -31,16 +31,19 @@ public class AddMessage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         try {
-            response.setContentType("text/html;charset=UTF-8");
-      
             JsonReader jsonReader = Json.createReader(request.getReader());
+
             JsonObject jsonObject = jsonReader.readObject();
-            String text = jsonObject.getString("tetx");
-            int personId = jsonObject.getInt("personid");
-            int id = jsonObject.getInt("id");
-            Message msg = new Message(id, personId, text);
+
+            String text = jsonObject.getString("mText");
+            int personId = jsonObject.getInt("mpersonid1");
+            int whosends = jsonObject.getInt("mpersonid2");
+            int id = jsonObject.getInt("msg_id");
+
+            Message msg = new Message(id, personId, whosends, text);
             DbHelper db = new DbHelper();
 
             db.addMessage(msg);
@@ -63,7 +66,7 @@ public class AddMessage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
