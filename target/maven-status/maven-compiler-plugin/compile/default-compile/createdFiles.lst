@@ -16,6 +16,7 @@ test\TestAddPerson.class
 controllers\EditProfile.class
 models\Question.class
 test\TestOrder.class
+api\getConversationAllMessages.class
 models\Notify.class
 controllers\myprofile\DeleteCurPersonPhoto.class
 test\AddMessage.class
@@ -33,6 +34,7 @@ test\TestDeleteImage.class
 controllers\auth\Login.class
 controllers\auth\Logout.class
 test\TestAllServices.class
+api\GetAllPersonConversationsById.class
 test\TestAddService.class
 test\TestGetOrders.class
 models\Order_search.class

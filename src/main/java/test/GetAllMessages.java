@@ -59,7 +59,7 @@ public class GetAllMessages extends HttpServlet {
         
           objectBuilder.add("messages", arrayBuilder);
            javax.json.JsonObject jsonObject = objectBuilder.build();
-           out.print(jsonObject.toString());
+           out.print(jrsonObject.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

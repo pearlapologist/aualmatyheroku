@@ -160,6 +160,14 @@
         <servlet-name>GetAllMessages</servlet-name>
         <servlet-class>test.GetAllMessages</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllPersonConversationsById</servlet-name>
+        <servlet-class>api.GetAllPersonConversationsById</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getConversationAllMessages</servlet-name>
+        <servlet-class>api.getConversationAllMessages</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -315,6 +323,14 @@
     <servlet-mapping>
         <servlet-name>GetAllMessages</servlet-name>
         <url-pattern>/GetAllMessages</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllPersonConversationsById</servlet-name>
+        <url-pattern>/GetAllPersonConversationsById</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getConversationAllMessages</servlet-name>
+        <url-pattern>/getConversationAllMessages</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

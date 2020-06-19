@@ -17,11 +17,10 @@ import javax.servlet.http.*;
  */
 public class DbHelper {
 
-   /* private static final String URL = "jdbc:mysql://localhost:3306/mydb?useSSL=false";
+    /* private static final String URL = "jdbc:mysql://localhost:3306/mydb?useSSL=false";
     private static final String DBUSER = "root";
     private static final String DBPASSWORD = "1q2w3e4r";*/
-
-     private static final String URL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com/etujrbvqopdq3qke?useSSL=false" ;
+    private static final String URL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com/etujrbvqopdq3qke?useSSL=false";
     private static final String DBUSER = "qyjw14jf9r663zjx";
     private static final String DBPASSWORD = "fgzp7rabhni4a09o";
     public static final String TABLE_PERSON = "persons";
@@ -2172,7 +2171,6 @@ where executernservices.executorid = executorid
             con.setAutoCommit(false);
             PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-         
             pstmt.setInt(1, message.getPersonId());
             pstmt.setInt(2, message.getWhosends());
             pstmt.setString(3, message.getText());
@@ -2188,7 +2186,7 @@ where executernservices.executorid = executorid
     }
 
     public Message getMessageById(int id) {
-        String query = "select * from messages where msg_id ="+id;
+        String query = "select * from messages where msg_id =" + id;
 
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
@@ -2197,7 +2195,7 @@ where executernservices.executorid = executorid
 
             if (rs.next()) {
                 int personId = rs.getInt("person_id1");
-                  int who = rs.getInt("person_id2");
+                int who = rs.getInt("person_id2");
                 String text = rs.getString("text");
                 Message msg = new Message(id, personId, who, text);
                 return msg;
@@ -2207,22 +2205,21 @@ where executernservices.executorid = executorid
             sqlEx.printStackTrace();
         }
         return null;
-    }  
-    
-    
-    public ArrayList<Message> getAllMesages(){
-      String query = "select * from messages ";
+    }
 
-      ArrayList<Message> result = new ArrayList();
+    public ArrayList<Message> getAllMesages() {
+        String query = "select * from messages ";
+
+        ArrayList<Message> result = new ArrayList();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-            if (rs.next()) {
-                   int id = rs.getInt("msg_id");
+            while (rs.next()) {
+                int id = rs.getInt("msg_id");
                 int personId = rs.getInt("person_id1");
-                  int who = rs.getInt("person_id2");
+                int who = rs.getInt("person_id2");
                 String text = rs.getString("text");
                 Message msg = new Message(id, personId, who, text);
                 result.add(msg);
@@ -2233,6 +2230,51 @@ where executernservices.executorid = executorid
         }
         return null;
     }
-    
+
+    public ArrayList<Integer> getAllPersonConversationsById(int id) {
+        String query = "select person_id1 from messages where person_id2=" + id
+                       + " union (select person_id2 from messages where person_id1=" + id + ")";
+
+        ArrayList<Integer> result = new ArrayList();
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                int pId = rs.getInt("person_id1");
+                result.add(pId);
+            }
+            return result;
+        } catch (Exception sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<Message> getConversationAllMessages(int person1, int person2) {
+        String query = "select * from messages where person_id2=" + person1 + " and person_id1=" + person2
+                       +" or person_id2=" + person2 + " and person_id1=" + person1;
+
+        ArrayList<Message> result = new ArrayList();
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+           while (rs.next()) {
+                int id = rs.getInt("msg_id");
+                int personId = rs.getInt("person_id1");
+                int who = rs.getInt("person_id2");
+                String text = rs.getString("text");
+                Message msg = new Message(id, personId, who, text);
+                result.add(msg);
+            }
+            return result;
+        } catch (Exception sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        return null;
+    }
     //</editor-fold>
 }

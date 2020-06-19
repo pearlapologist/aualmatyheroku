@@ -14,7 +14,8 @@ public class Message {
     private int personId;
     private int whosends;
     private String text;
-
+    
+    public Message(){}
     public int getPersonId() {
         return personId;
     }

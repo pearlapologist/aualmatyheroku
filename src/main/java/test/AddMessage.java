@@ -41,9 +41,11 @@ public class AddMessage extends HttpServlet {
             String text = jsonObject.getString("mText");
             int personId = jsonObject.getInt("mpersonid1");
             int whosends = jsonObject.getInt("mpersonid2");
-            int id = jsonObject.getInt("msg_id");
 
-            Message msg = new Message(id, personId, whosends, text);
+            Message msg = new Message();
+            msg.setPersonId(personId);
+            msg.setWhosends(whosends);
+            msg.setText(text);
             DbHelper db = new DbHelper();
 
             db.addMessage(msg);
