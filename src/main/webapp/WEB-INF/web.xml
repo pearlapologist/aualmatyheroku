@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-   version="4.0">
-    
-     <servlet>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <servlet>
         <servlet-name>Profile</servlet-name>
         <servlet-class>controllers.Profile</servlet-class>
     </servlet>
@@ -148,6 +144,22 @@
         <servlet-name>AddService</servlet-name>
         <servlet-class>controllers.myprofile.AddService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateFormAddService</servlet-name>
+        <servlet-class>controllers.myprofile.CreateFormAddService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddMessage</servlet-name>
+        <servlet-class>test.AddMessage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMessageById</servlet-name>
+        <servlet-class>test.GetMessageById</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAllMessages</servlet-name>
+        <servlet-class>test.GetAllMessages</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -288,6 +300,22 @@
         <param-name>text</param-name>
         <param-value>some text </param-value>
     </context-param>
+    <servlet-mapping>
+        <servlet-name>CreateFormAddService</servlet-name>
+        <url-pattern>/CreateFormAddService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddMessage</servlet-name>
+        <url-pattern>/AddMessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMessageById</servlet-name>
+        <url-pattern>/GetMessageById</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllMessages</servlet-name>
+        <url-pattern>/GetAllMessages</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

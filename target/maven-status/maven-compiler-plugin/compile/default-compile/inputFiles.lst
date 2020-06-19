@@ -9,11 +9,13 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestDeleteImage.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\CreateForm.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestAddPerson.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\AddMessage.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\DataUtils.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestExecutorServices.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\auth\Signup.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\com\mycompany\aualmaty\JAXRSConfiguration.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\auth\Login.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Message.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\com\mycompany\aualmaty\resources\JavaEE8Resource.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestGetOrders.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestAllServices.java
@@ -36,10 +38,12 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\Quiziz.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\Result.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Response.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\CreateFormAddService.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\EditProfileSettings.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\SeparateOrder.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Bookmarks.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\MyCabinet.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\GetMessageById.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestJson.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\questions\QuestionAdd.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\NewResponse.java

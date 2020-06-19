@@ -17,17 +17,13 @@ import javax.servlet.http.*;
  */
 public class DbHelper {
 
-  /* private static final String URL = "jdbc:mysql://localhost:3306/mydb?useSSL=false";
+   /* private static final String URL = "jdbc:mysql://localhost:3306/mydb?useSSL=false";
     private static final String DBUSER = "root";
     private static final String DBPASSWORD = "1q2w3e4r";*/
-    
-    
-    private static final String URL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com/etujrbvqopdq3qke?sslmode=require";
+
+     private static final String URL = "jdbc:mysql://dz8959rne9lumkkw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com/etujrbvqopdq3qke?useSSL=false" ;
     private static final String DBUSER = "qyjw14jf9r663zjx";
     private static final String DBPASSWORD = "fgzp7rabhni4a09o";
-    
-    
-
     public static final String TABLE_PERSON = "persons";
     public static final String TABLE_ORDERS = "orders";
     public static final String TABLE_ORDERNPERSON = "ordernperson";
@@ -197,10 +193,10 @@ public class DbHelper {
 
 // <editor-fold defaultstate="collapsed" desc="Person">
     public void addPerson(Person person) {
-        
+
         String pphoto = person.getPhoto();
-        if(pphoto == null){
-        pphoto = "executors_default_image.png";
+        if (pphoto == null) {
+            pphoto = "executors_default_image.png";
         }
         String query = "INSERT INTO " + TABLE_PERSON + "(" + KEY_PERSON_NAME + ", " + KEY_PERSON_LASTNAME + ", " + KEY_PERSON_NUMBER
                        + ", " + KEY_PERSON_PASSWD + ", " + KEY_PERSON_CREATED_DATE + ", " + KEY_PERSON_PHOTO + ", " + KEY_PERSON_BIRTHDAY
@@ -386,18 +382,18 @@ public class DbHelper {
         }
         return rating;
     }
-    
-    public String getPersonNumbById(int id){
-      String query = "select " + KEY_PERSON_NUMBER + " from " + TABLE_PERSON + " where " + KEY_PERSON_ID
-                       + " = " + id ;
-      try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+
+    public String getPersonNumbById(int id) {
+        String query = "select " + KEY_PERSON_NUMBER + " from " + TABLE_PERSON + " where " + KEY_PERSON_ID
+                       + " = " + id;
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             if (rs.first()) {
-               String numb = rs.getString(1);
-               return numb;
+                String numb = rs.getString(1);
+                return numb;
             }
         } catch (Exception sqlEx) {
             sqlEx.printStackTrace();
@@ -413,7 +409,7 @@ public class DbHelper {
                        + KEY_PERSON_RATING + "=?,"
                        + KEY_PERSON_NUMBER + "=?,"
                        + KEY_PERSON_BIRTHDAY + "=?,"
-                        + KEY_PERSON_PHOTO + "=?"
+                       + KEY_PERSON_PHOTO + "=?"
                        + " WHERE " + KEY_PERSON_ID + "=" + person.getId();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
@@ -426,7 +422,7 @@ public class DbHelper {
             pstmt.setInt(4, person.getRating());
             pstmt.setString(5, person.getNumber());
             pstmt.setLong(6, person.getBirthday());
-             pstmt.setString(7, person.getPhoto());
+            pstmt.setString(7, person.getPhoto());
 
             pstmt.executeUpdate();
 
@@ -2166,4 +2162,51 @@ where executernservices.executorid = executorid
     }
 //</editor-fold>
 
+    //<editor-fold desc="Message">
+    public void addMessage(Message message) {
+        String query = "insert into messages (person_id1, person_id2,  text) values (?,?,?) ";
+
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            con.setAutoCommit(false);
+            PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+         
+            pstmt.setInt(1, message.getPersonId());
+            pstmt.setInt(2, message.getWhosends());
+            pstmt.setString(3, message.getText());
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                message.setPersonId(1);
+            }
+
+        } catch (Exception sqlEx) {
+            sqlEx.printStackTrace();
+        }
+
+    }
+
+    public Message getMessageById(int id) {
+        String query = "select * from messages where msg_id ="+id;
+
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            if (rs.next()) {
+                int personId = rs.getInt("person_id1");
+                  int who = rs.getInt("person_id2");
+                String text = rs.getString("text");
+                Message msg = new Message(id, personId, who, text);
+                return msg;
+            }
+
+        } catch (Exception sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        return null;
+    }
+    //</editor-fold>
 }

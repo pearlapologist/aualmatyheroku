@@ -10,7 +10,7 @@ public class Account {
 
 
     HttpSession session = request.getSession();
-    if(session ==null){
+    if(session ==null || session.getAttribute("personIdSession") ==null){
         return null;
     }
        int id = -1;
