@@ -168,6 +168,18 @@
         <servlet-name>getConversationAllMessages</servlet-name>
         <servlet-class>api.getConversationAllMessages</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getPersonByNumbNPasswd</servlet-name>
+        <servlet-class>api.getPersonByNumbNPasswd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPersonById</servlet-name>
+        <servlet-class>api.GetPersonById</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddPerson</servlet-name>
+        <servlet-class>api.AddPerson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -331,6 +343,18 @@
     <servlet-mapping>
         <servlet-name>getConversationAllMessages</servlet-name>
         <url-pattern>/getConversationAllMessages</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getPersonByNumbNPasswd</servlet-name>
+        <url-pattern>/getPersonByNumbNPasswd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPersonById</servlet-name>
+        <url-pattern>/GetPersonById</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPerson</servlet-name>
+        <url-pattern>/AddPerson</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

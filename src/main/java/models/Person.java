@@ -10,7 +10,8 @@ package models;
  * @author bayan
  */
 public class Person {
-   private int id;
+
+    private int id;
     private String name;
     private String lastname;
     private String passwd;
@@ -23,46 +24,44 @@ public class Person {
     boolean hasAccount;
     //upd
     private Long birthday;
-    public Person(){};
 
-    public Person(int id,String name, String lastname, String passwd) {
+    public Person() {
+    } ;
+
+    public Person(int id, String name, String lastname, String passwd) {
         this.name = name;
         this.id = id;
         this.lastname = lastname;
         this.passwd = passwd;
-         Long created = DataUtils.getCurentDateInLong();
-         this.createdDate = created;
+        Long created = DataUtils.getCurentDateInLong();
+        this.createdDate = created;
     }
-    
-       public Person(String name, String lastname, String passwd) {
+
+    public Person(String name, String lastname, String passwd) {
         this.name = name;
         this.lastname = lastname;
         this.passwd = passwd;
-         Long created = DataUtils.getCurentDateInLong();
-         this.createdDate = created;
+        Long created = DataUtils.getCurentDateInLong();
+        this.createdDate = created;
     }
-    
-  
-    
-      //with number
-          public Person(String name, String lastname, String number, String passwd) {
+
+    //with number
+    public Person(String name, String lastname, String number, String passwd) {
         this.name = name;
         this.lastname = lastname;
         this.number = number;
         this.passwd = passwd;
-         Long created = DataUtils.getCurentDateInLong();
-         this.createdDate = created;
+        Long created = DataUtils.getCurentDateInLong();
+        this.createdDate = created;
     }
-    
-    
+
 //    
 // public Person(String name, String passwd) {
 //        this.name = name;
 //        this.passwd = passwd;
 //    }
 // 
- 
-   public Person(int id, String name, String lastname, String passwd, String photo, String number, int rating) {
+    public Person(int id, String name, String lastname, String passwd, String photo, String number, int rating) {
         this.id = id;
         this.passwd = passwd;
         this.name = name;
@@ -70,23 +69,23 @@ public class Person {
         this.rating = rating;
         this.photo = photo;
         this.number = number;
-         Long created = DataUtils.getCurentDateInLong();
-         this.createdDate = created;
+        Long created = DataUtils.getCurentDateInLong();
+        this.createdDate = created;
     }
-   
-   //wout photo
-       public Person(String name, String lastname, String passwd, String number, int rating) {
+
+    //wout photo
+    public Person(String name, String lastname, String passwd, String number, int rating) {
         this.passwd = passwd;
         this.name = name;
         this.lastname = lastname;
         this.rating = rating;
         this.photo = photo;
         this.number = number;
-         Long created = DataUtils.getCurentDateInLong();
+        Long created = DataUtils.getCurentDateInLong();
         this.createdDate = created;
     }
-       
-          public Person(int id, String name, String lastname, String passwd, String number, int rating, Long created) {
+
+    public Person(int id, String name, String lastname, String passwd, String number, int rating, Long created) {
         this.id = id;
         this.passwd = passwd;
         this.name = name;
@@ -96,7 +95,7 @@ public class Person {
         this.number = number;
         this.createdDate = created;
     }
-   
+
     public int getId() {
         return id;
     }
@@ -135,10 +134,9 @@ public class Person {
 
     public String getCreatedDateinString() {
         Long create = this.createdDate;
-      String str =  DataUtils.convertLongToDataString(create);
+        String str = DataUtils.convertLongToDataString(create);
         return str;
     }
-
 
     public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
@@ -187,6 +185,7 @@ public class Person {
     public void setBirthday(Long birthday) {
         this.birthday = birthday;
     }
+
     public String getPhoto() {
         return photo;
     }
@@ -195,5 +194,4 @@ public class Person {
         this.photo = photo;
     }
 
- 
 }

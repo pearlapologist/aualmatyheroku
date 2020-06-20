@@ -275,6 +275,15 @@ public class DbHelper {
         p.setBirthday(birthday);
         return p;
     }
+    
+      public void pushPersonsParametersToJson(javax.json.JsonObjectBuilder nuilder, Person p) {
+        nuilder.add("pId", p.getId())
+                .add("pName", p.getName())
+                .add("pLastName", p.getLastname())
+                .add("pNumber", p.getNumber())
+                .add("pCreated", p.getCreatedDate())
+                .add("pRating", p.getRating());
+    }
 
     /**
      * Возвращает пользователя по номеру, чтобы проверить зарегистрирован ли он
