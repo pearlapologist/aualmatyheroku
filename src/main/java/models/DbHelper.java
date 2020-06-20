@@ -2162,8 +2162,8 @@ where executernservices.executorid = executorid
 //</editor-fold>
 
     //<editor-fold desc="Message">
-    public void addMessage(Message message) {
-        String query = "insert into messages (person_id1, person_id2,  text) values (?,?,?) ";
+    public void addMessage(Message message) throws Exception {
+        String query = "insert into messages (person_id1, person_id2,text) values (?,?,?) ";
 
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
@@ -2176,12 +2176,11 @@ where executernservices.executorid = executorid
             pstmt.setString(3, message.getText());
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
-                message.setPersonId(1);
+                message.setId(rs.getInt(1));
             }
+            con.commit();
 
-        } catch (Exception sqlEx) {
-            sqlEx.printStackTrace();
-        }
+        } 
 
     }
 
