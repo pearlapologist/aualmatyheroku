@@ -197,7 +197,7 @@ public class DbHelper {
         if (pphoto == null) {
             pphoto = "executors_default_image.png";
         }
-        String query = "INSERT INTO " + TABLE_PERSON + "(" + KEY_PERSON_NAME + ", " + KEY_PERSON_LASTNAME + ", " + KEY_PERSON_NUMBER
+         String query = "INSERT INTO " + TABLE_PERSON + "(" + KEY_PERSON_NAME + ", " + KEY_PERSON_LASTNAME + ", " + KEY_PERSON_NUMBER
                        + ", " + KEY_PERSON_PASSWD + ", " + KEY_PERSON_CREATED_DATE + ", " + KEY_PERSON_PHOTO + ", " + KEY_PERSON_BIRTHDAY
                        + ") VALUES ('" + person.getName() + "','"
                        + person.getLastname() + "','"
@@ -206,11 +206,20 @@ public class DbHelper {
                        + person.getCreatedDate() + ",'"
                        + pphoto + "',"
                        + person.getBirthday() + ")";
+        /*String query = "insert into persons(person_passw, person_number) values ('"+person.getNumber()+"','"+person.getPasswd()+"')";*/
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
 
             Statement stmt2 = con.createStatement();
             stmt2.execute(query);
+
+            String sqlMaxId = "SELECT MAX(person_id) FROM persons";
+            int maxId = 0;
+            ResultSet rs = stmt2.executeQuery(sqlMaxId);
+            if (rs.first()) {
+                maxId = rs.getInt(1);
+            }
+            person.setId(maxId);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -275,8 +284,8 @@ public class DbHelper {
         p.setBirthday(birthday);
         return p;
     }
-    
-      public void pushPersonsParametersToJson(javax.json.JsonObjectBuilder nuilder, Person p) {
+
+    public void pushPersonsParametersToJson(javax.json.JsonObjectBuilder nuilder, Person p) {
         nuilder.add("pId", p.getId())
                 .add("pName", p.getName())
                 .add("pLastName", p.getLastname())
@@ -2172,25 +2181,24 @@ where executernservices.executorid = executorid
 
     //<editor-fold desc="Message">
     public void addMessage(Message message) throws Exception {
-        String query = "insert into messages (person_id1, person_id2, text) values ("+message.getPersonId()+","+
-                    message.getWhosends() + ", '"+message.getText()+"') ";
+        String query = "insert into messages (person_id1, person_id2, text) values (" + message.getPersonId() + ","
+                       + message.getWhosends() + ", '" + message.getText() + "') ";
 
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
 
-                Statement stmt = con.createStatement();
-                stmt.execute(query );
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
 
-                String sqlMaxId = "SELECT MAX(msg_id) FROM messages";
-                int maxId = 0;
-                ResultSet rs = stmt.executeQuery(sqlMaxId);
-                if (rs.first()) {
-                    maxId = rs.getInt(1);
-                }
-                message.setId(maxId);
+            String sqlMaxId = "SELECT MAX(msg_id) FROM messages";
+            int maxId = 0;
+            ResultSet rs = stmt.executeQuery(sqlMaxId);
+            if (rs.first()) {
+                maxId = rs.getInt(1);
             }
-        } 
-
+            message.setId(maxId);
+        }
+    }
 
     public Message getMessageById(int id) {
         String query = "select * from messages where msg_id =" + id;
@@ -2261,7 +2269,7 @@ where executernservices.executorid = executorid
 
     public ArrayList<Message> getConversationAllMessages(int person1, int person2) {
         String query = "select * from messages where person_id2=" + person1 + " and person_id1=" + person2
-                       +" or person_id2=" + person2 + " and person_id1=" + person1;
+                       + " or person_id2=" + person2 + " and person_id1=" + person1;
 
         ArrayList<Message> result = new ArrayList();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
@@ -2269,7 +2277,7 @@ where executernservices.executorid = executorid
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
-           while (rs.next()) {
+            while (rs.next()) {
                 int id = rs.getInt("msg_id");
                 int personId = rs.getInt("person_id1");
                 int who = rs.getInt("person_id2");

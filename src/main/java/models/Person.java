@@ -15,7 +15,7 @@ public class Person {
     private String name;
     private String lastname;
     private String passwd;
-    private Long createdDate;
+    private String createdDate;
     private int rating;
     private String status;
     private String photo;
@@ -23,9 +23,11 @@ public class Person {
     String desciption;
     boolean hasAccount;
     //upd
-    private Long birthday;
+    private String birthday;
 
     public Person() {
+            String created = DataUtils.getCurrentDateInString();
+        this.createdDate = created;
     } ;
 
     public Person(int id, String name, String lastname, String passwd) {
@@ -33,7 +35,7 @@ public class Person {
         this.id = id;
         this.lastname = lastname;
         this.passwd = passwd;
-        Long created = DataUtils.getCurentDateInLong();
+        String created = DataUtils.getCurrentDateInString();
         this.createdDate = created;
     }
 
@@ -41,7 +43,7 @@ public class Person {
         this.name = name;
         this.lastname = lastname;
         this.passwd = passwd;
-        Long created = DataUtils.getCurentDateInLong();
+     String created = DataUtils.getCurrentDateInString();
         this.createdDate = created;
     }
 
@@ -51,7 +53,7 @@ public class Person {
         this.lastname = lastname;
         this.number = number;
         this.passwd = passwd;
-        Long created = DataUtils.getCurentDateInLong();
+   String created = DataUtils.getCurrentDateInString();
         this.createdDate = created;
     }
 
@@ -69,7 +71,7 @@ public class Person {
         this.rating = rating;
         this.photo = photo;
         this.number = number;
-        Long created = DataUtils.getCurentDateInLong();
+     String created = DataUtils.getCurrentDateInString();
         this.createdDate = created;
     }
 
@@ -81,7 +83,7 @@ public class Person {
         this.rating = rating;
         this.photo = photo;
         this.number = number;
-        Long created = DataUtils.getCurentDateInLong();
+   String created = DataUtils.getCurrentDateInString();
         this.createdDate = created;
     }
 
@@ -93,7 +95,8 @@ public class Person {
         this.rating = rating;
         this.photo = photo;
         this.number = number;
-        this.createdDate = created;
+   String createds = DataUtils.getCurrentDateInString();
+        this.createdDate = createds;
     }
 
     public int getId() {
@@ -128,17 +131,12 @@ public class Person {
         this.passwd = passwd;
     }
 
-    public Long getCreatedDate() {
+    public String  getCreatedDate() {
         return createdDate;
     }
 
-    public String getCreatedDateinString() {
-        Long create = this.createdDate;
-        String str = DataUtils.convertLongToDataString(create);
-        return str;
-    }
-
-    public void setCreatedDate(Long createdDate) {
+   
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -178,11 +176,11 @@ public class Person {
         this.desciption = desciption;
     }
 
-    public Long getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Long birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

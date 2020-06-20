@@ -7,6 +7,7 @@ package api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,18 +32,7 @@ public class AddPerson extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddPerson</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddPerson at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,7 +47,6 @@ public class AddPerson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // processRequest(request, response);
     }
 
     /**
@@ -74,23 +63,21 @@ public class AddPerson extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            javax.json.JsonReader jsonReader = javax.json.Json.createReader(request.getReader());
+           JsonReader jsonReader = Json.createReader(request.getReader());
 
-            javax.json.JsonObject jsonObject = jsonReader.readObject();
+            JsonObject jsonObject = jsonReader.readObject();
 
-            String name = jsonObject.getString("pName");
-            String lastname = jsonObject.getString("pLastname");
-            String number = jsonObject.getString("pNumb");
-            String passwd = jsonObject.getString("pPasswd");
-            Long created = Long.valueOf(jsonObject.getString("pCreated"));
-            Long birthday = Long.valueOf(jsonObject.getString("pBithday"));
+           String name = jsonObject.getString("name");
+            String lastname = jsonObject.getString("lastname");
+            String number = jsonObject.getString("numb");
+            String passwd = jsonObject.getString("passwd");
+            String birthday = jsonObject.getString("birth");
 
           Person p = new Person();
             p.setName(name);
             p.setLastname(lastname);
             p.setNumber(number);
             p.setPasswd(passwd);
-            p.setCreatedDate(created);
             p.setBirthday(birthday);
 
             models.DbHelper db = new models.DbHelper();
