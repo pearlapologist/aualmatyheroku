@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api;
 
 import java.io.IOException;
-import models.*;
 import java.io.PrintWriter;
-import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author bayan
  */
-public class getPersonByNumbNPasswd extends HttpServlet {
+public class getPersonByNumber extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,36 +29,34 @@ public class getPersonByNumbNPasswd extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-          PrintWriter out = response.getWriter();
-        
-      String passwd = null;
-            String numb = null;
+      PrintWriter out = response.getWriter();
+      String number = "";
         try {
-            passwd = request.getParameter("passwd");
-              numb = request.getParameter("num");
+            number = request.getParameter("numb");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        
+
         models.DbHelper db = new models.DbHelper();
-        Person person  = db.getPersonByPasswdNNumb(numb, passwd);
-        if(person == null){
-           JsonObjectBuilder objectBuilder = Json.createObjectBuilder().add("errorMessage", "404error");
-            String result = objectBuilder.build().toString();
-            out.print(result);
+        models.Person p = db.getPersonByNumb(number);
+
+        if (p == null) {
+            javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder().
+                    add("Ошибка", "Пользователь не найден");
+            out.print(objectBuilder.build().toString());
             return;
         }
-         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-          objectBuilder.add("personId", person.getId());
-           objectBuilder.add("name", person.getName());
-            objectBuilder.add("lastname", person.getLastname());
-           objectBuilder.add("number", person.getNumber());
-           
-           JsonObject jsonObject = objectBuilder.build();
-           out.print(jsonObject.toString());
+
+        javax.json.JsonObjectBuilder builderr = javax.json.Json.createObjectBuilder();
+
+        builderr.add("id", p.getId());
+        builderr.add("name", p.getName());
+        builderr.add("lastname", p.getLastname());
+        builderr.add("number", p.getNumber());
+
+       javax.json.JsonObject jsonObject = builderr.build();
+        out.print(jsonObject.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

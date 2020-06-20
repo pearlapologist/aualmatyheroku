@@ -43,11 +43,11 @@
                         Рейтинг: <%=p.getRating()%> <br/>
 
                         <%
-                            String birth = DataUtils.convertLongToDataString(p.getBirthday());
+                            String birth = p.getBirthday();
                         %>
                         Дата рождения: <%=birth%> <br/>
                         <%
-                            String created = DataUtils.convertLongToDataString(p.getCreatedDate());
+                          String  created =  p.getCreatedDate();
                         %>
                         Дата регистрации: <%=created%> <br/>
                         Мои услуги: <br/>

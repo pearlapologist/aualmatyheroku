@@ -6,19 +6,19 @@
 package api;
 
 import java.io.IOException;
-import models.*;
 import java.io.PrintWriter;
 import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.*;
 
 /**
  *
  * @author bayan
  */
-public class getPersonByNumbNPasswd extends HttpServlet {
+public class UpdatePersonById extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,36 +32,18 @@ public class getPersonByNumbNPasswd extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-          PrintWriter out = response.getWriter();
-        
-      String passwd = null;
-            String numb = null;
-        try {
-            passwd = request.getParameter("passwd");
-              numb = request.getParameter("num");
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdatePersonById</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdatePersonById at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        
-        
-        models.DbHelper db = new models.DbHelper();
-        Person person  = db.getPersonByPasswdNNumb(numb, passwd);
-        if(person == null){
-           JsonObjectBuilder objectBuilder = Json.createObjectBuilder().add("errorMessage", "404error");
-            String result = objectBuilder.build().toString();
-            out.print(result);
-            return;
-        }
-         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-          objectBuilder.add("personId", person.getId());
-           objectBuilder.add("name", person.getName());
-            objectBuilder.add("lastname", person.getLastname());
-           objectBuilder.add("number", person.getNumber());
-           
-           JsonObject jsonObject = objectBuilder.build();
-           out.print(jsonObject.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,7 +72,42 @@ public class getPersonByNumbNPasswd extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            PrintWriter out = response.getWriter();
+           int id =-1;
+        try {
+            id= Integer.parseInt(request.getParameter("id"));
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+          JsonReader jsonReader = Json.createReader(request.getReader());
+          
+          JsonObject jsonObject = jsonReader.readObject();
+
+           String name = jsonObject.getString("pName");
+            String lastname = jsonObject.getString("pLastname");
+            String number = jsonObject.getString("numb");
+            String passwd = jsonObject.getString("passwd");
+            String birthday = jsonObject.getString("pBirthday");
+            //String photo = jsonObject.getString("photo");
+            
+           DbHelper db = new DbHelper();
+
+          Person p = db.getPerson(id);
+            p.setName(name);
+            p.setLastname(lastname);
+            p.setNumber(number);
+            p.setPasswd(passwd);
+            p.setBirthday(birthday);
+
+            
+            db.updatePerson(p);
+            out.print(p.getId());
+        } catch (Exception e) {
+            out.print("Error: " + e.getMessage());
+        }
     }
 
     /**

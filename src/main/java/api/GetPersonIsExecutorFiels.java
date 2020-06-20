@@ -6,19 +6,18 @@
 package api;
 
 import java.io.IOException;
-import models.*;
 import java.io.PrintWriter;
-import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.*;
 
 /**
  *
  * @author bayan
  */
-public class getPersonByNumbNPasswd extends HttpServlet {
+public class GetPersonIsExecutorFiels extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,36 +31,35 @@ public class getPersonByNumbNPasswd extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+     PrintWriter out = response.getWriter();
         
-          PrintWriter out = response.getWriter();
-        
-      String passwd = null;
-            String numb = null;
+        int id =-1;
         try {
-            passwd = request.getParameter("passwd");
-              numb = request.getParameter("num");
-
+            id= Integer.parseInt(request.getParameter("id"));
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         
         
-        models.DbHelper db = new models.DbHelper();
-        Person person  = db.getPersonByPasswdNNumb(numb, passwd);
+      DbHelper db = new models.DbHelper();
+       Person person = db.getPerson(id);
         if(person == null){
-           JsonObjectBuilder objectBuilder = Json.createObjectBuilder().add("errorMessage", "404error");
+           javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder().add("errorMessage", "404error");
             String result = objectBuilder.build().toString();
             out.print(result);
             return;
         }
-         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-          objectBuilder.add("personId", person.getId());
-           objectBuilder.add("name", person.getName());
-            objectBuilder.add("lastname", person.getLastname());
-           objectBuilder.add("number", person.getNumber());
-           
-           JsonObject jsonObject = objectBuilder.build();
+         javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder();
+         int value = 0;
+         boolean b = db.getPersonIsExecutorField(id);
+         if(b == true){
+         value = 1;
+         }
+          objectBuilder.add("value",value);
+           javax.json.JsonObject jsonObject = objectBuilder.build();
            out.print(jsonObject.toString());
+          
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

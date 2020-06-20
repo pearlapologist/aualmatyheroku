@@ -176,6 +176,34 @@
         <servlet-name>AddPerson</servlet-name>
         <servlet-class>api.AddPerson</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getPersonByNumber</servlet-name>
+        <servlet-class>getPersonByNumber</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePersonById</servlet-name>
+        <servlet-class>api.UpdatePersonById</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPersonIsExecutorFiels</servlet-name>
+        <servlet-class>api.GetPersonIsExecutorFiels</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetPersonIsExecutorField</servlet-name>
+        <servlet-class>api.SetPersonIsExecutorField</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPersonRatingById</servlet-name>
+        <servlet-class>api.GetPersonRatingById</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePersonRatingById</servlet-name>
+        <servlet-class>api.UpdatePersonRatingById</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePersonById</servlet-name>
+        <servlet-class>api.DeletePersonById</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -347,6 +375,34 @@
     <servlet-mapping>
         <servlet-name>AddPerson</servlet-name>
         <url-pattern>/AddPerson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getPersonByNumber</servlet-name>
+        <url-pattern>/getPersonByNumber</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePersonById</servlet-name>
+        <url-pattern>/UpdatePersonById</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPersonIsExecutorFiels</servlet-name>
+        <url-pattern>/GetPersonIsExecutorFiels</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetPersonIsExecutorField</servlet-name>
+        <url-pattern>/SetPersonIsExecutorField</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPersonRatingById</servlet-name>
+        <url-pattern>/GetPersonRatingById</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePersonRatingById</servlet-name>
+        <url-pattern>/UpdatePersonRatingById</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePersonById</servlet-name>
+        <url-pattern>/DeletePersonById</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -51,11 +51,14 @@ public class GetPersonById extends HttpServlet {
             return;
         }
 
-        javax.json.JsonObjectBuilder builderr = javax.json.Json.createObjectBuilder();
-        db.pushPersonsParametersToJson(builderr, p);
+        JsonObjectBuilder builderr = Json.createObjectBuilder();
 
-        javax.json.JsonObject jsonObject = builderr.build();
+        builderr.add("id", p.getId());
+        builderr.add("name", p.getName());
+        builderr.add("lastname", p.getLastname());
+        builderr.add("number", p.getNumber());
 
+       JsonObject jsonObject = builderr.build();
         out.print(jsonObject.toString());
     }
 

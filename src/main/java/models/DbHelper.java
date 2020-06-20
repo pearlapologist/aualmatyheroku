@@ -323,8 +323,9 @@ public class DbHelper {
      * Возвращает пользователя по номеру и паролю для авторизации
      */
     public Person getPersonByPasswdNNumb(String numb, String passwd) {
-        String query = "select * from " + TABLE_PERSON + " where " + KEY_PERSON_NUMBER + "='"
-                       + numb + "' AND " + KEY_PERSON_PASSWD + "= '" + passwd + "'";
+        String sun = numb.substring(1, 11);
+        String query = "select * from " + TABLE_PERSON + " where " + KEY_PERSON_PASSWD + "='"
+                       + passwd + "' AND " + KEY_PERSON_NUMBER + " like '_%" + sun + "'";
 
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
