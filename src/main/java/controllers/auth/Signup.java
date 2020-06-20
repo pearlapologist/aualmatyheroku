@@ -70,10 +70,11 @@ public class Signup extends HttpServlet {
             fileName = DataUtils.generateRandomString(15) + ".jpg";
         }
 
-        Long birthday = 0L;
+        String birthday = "";
         try {
             String b = request.getParameter("birthday");
-            birthday = DataUtils.convertDataToLongWithRawString(b);
+           // birthday = DataUtils.convertDataToLongWithRawString(b);
+           birthday = b;
         } catch (Exception e) {
             e.printStackTrace();
         }

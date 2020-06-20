@@ -37,7 +37,7 @@ public class TestAllPersons extends HttpServlet {
         DbHelper db = new models.DbHelper();
         ArrayList<Person> persons=  db.getPersons();
         for(Person p : persons){
-            out.print("Person id="+p.getId() + "-" + p.getName() +"," + DataUtils.convertLongToDataString(p.getCreatedDate()) + "</br>");
+            out.print("Person id="+p.getId() + "-" + p.getName() +"," + p.getCreatedDate() + "</br>");
        
         }
         

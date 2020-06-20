@@ -277,7 +277,7 @@ public class DbHelper {
         int rating = rs.getInt(KEY_PERSON_RATING);
         long date = rs.getLong(KEY_PERSON_CREATED_DATE);
         String photo = rs.getString(KEY_PERSON_PHOTO);
-        Long birthday = rs.getLong(KEY_PERSON_BIRTHDAY);
+        String birthday = rs.getString(KEY_PERSON_BIRTHDAY);
 
         Person p = new Person(id, name, last, passwd, number, rating, date);
         p.setPhoto(photo);
@@ -424,8 +424,8 @@ public class DbHelper {
                        + KEY_PERSON_LASTNAME + "=?,"
                        + KEY_PERSON_PASSWD + "=?,"
                        + KEY_PERSON_RATING + "=?,"
-                       + KEY_PERSON_NUMBER + "=?,"
-                       + KEY_PERSON_BIRTHDAY + "=?,"
+                       + KEY_PERSON_NUMBER + "=?,'"
+                       + KEY_PERSON_BIRTHDAY + "'=?,"
                        + KEY_PERSON_PHOTO + "=?"
                        + " WHERE " + KEY_PERSON_ID + "=" + person.getId();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
@@ -438,7 +438,7 @@ public class DbHelper {
             pstmt.setString(3, person.getPasswd());
             pstmt.setInt(4, person.getRating());
             pstmt.setString(5, person.getNumber());
-            pstmt.setLong(6, person.getBirthday());
+            pstmt.setString(6, person.getBirthday());
             pstmt.setString(7, person.getPhoto());
 
             pstmt.executeUpdate();

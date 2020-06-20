@@ -59,10 +59,6 @@
         <servlet-class>test.TestGetOrders</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TestAddPerson</servlet-name>
-        <servlet-class>test.TestAddPerson</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>TestAllPersons</servlet-name>
         <servlet-class>test.TestAllPersons</servlet-class>
     </servlet>
@@ -231,10 +227,6 @@
     <servlet-mapping>
         <servlet-name>TestGetOrders</servlet-name>
         <url-pattern>/TestGetOrders</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TestAddPerson</servlet-name>
-        <url-pattern>/TestAddPerson</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TestAllPersons</servlet-name>
