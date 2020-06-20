@@ -30,31 +30,26 @@ public class AddMessage extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+       
+
+      /*  String text = request.getParameter("text");
+
+        int person1Id = Integer.parseInt(request.getParameter("person1Id"));
+        int person2Id = Integer.parseInt(request.getParameter("person2Id"));
+
+        DbHelper db = new DbHelper();
         
-        try {
-            JsonReader jsonReader = Json.createReader(request.getReader());
+        Message msg = new Message();
+        msg.setPersonId(person1Id);
+        msg.setWhosends(person2Id);
+        msg.setText(text);
+        
+        db.addMessage(msg);
+        out.print(msg.getId());*/
+        
 
-            JsonObject jsonObject = jsonReader.readObject();
-
-            String text = jsonObject.getString("mText");
-            int personId = jsonObject.getInt("mpersonid1");
-            int whosends = jsonObject.getInt("mpersonid2");
-
-            Message msg = new Message();
-            msg.setPersonId(personId);
-            msg.setWhosends(whosends);
-            msg.setText(text);
-            DbHelper db = new DbHelper();
-
-            db.addMessage(msg);
-            out.print(msg.getId());
-        } catch (Exception e) {
-            out.print("Error:" + e.getMessage());
-            e.printStackTrace();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -83,7 +78,26 @@ public class AddMessage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      
+ PrintWriter out = response.getWriter();
+
+      try {
+            JsonReader jsonReader = Json.createReader(request.getReader());
+
+            JsonObject jsonObject = jsonReader.readObject();
+
+            String text = jsonObject.getString("msg");
+
+            Message msg = new Message();
+            msg.setText(text);
+            
+            DbHelper db = new DbHelper();
+            db.addMessage(msg);
+            
+            out.print(msg.getId());
+        } catch (Exception e) {
+            out.print("Error: " + e.getMessage());
+        }
     }
 
     /**

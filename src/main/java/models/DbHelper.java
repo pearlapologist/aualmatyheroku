@@ -2163,26 +2163,24 @@ where executernservices.executorid = executorid
 
     //<editor-fold desc="Message">
     public void addMessage(Message message) throws Exception {
-        String query = "insert into messages (person_id1, person_id2,text) values (?,?,?) ";
+        String query = "insert into messages (text) values ('"+message.getText()+"') ";
 
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
 
-            con.setAutoCommit(false);
-            PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                Statement stmt = con.createStatement();
+                stmt.execute(query );
 
-            pstmt.setInt(1, message.getPersonId());
-            pstmt.setInt(2, message.getWhosends());
-            pstmt.setString(3, message.getText());
-            ResultSet rs = pstmt.getGeneratedKeys();
-            if (rs.next()) {
-                message.setId(rs.getInt(1));
+                String sqlMaxId = "SELECT MAX(msg_id) FROM messages";
+                int maxId = 0;
+                ResultSet rs = stmt.executeQuery(sqlMaxId);
+                if (rs.first()) {
+                    maxId = rs.getInt(1);
+                }
+                message.setId(maxId);
             }
-            con.commit();
-
         } 
 
-    }
 
     public Message getMessageById(int id) {
         String query = "select * from messages where msg_id =" + id;
