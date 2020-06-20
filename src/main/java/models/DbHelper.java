@@ -2163,7 +2163,8 @@ where executernservices.executorid = executorid
 
     //<editor-fold desc="Message">
     public void addMessage(Message message) throws Exception {
-        String query = "insert into messages (text) values ('"+message.getText()+"') ";
+        String query = "insert into messages (person_id1, person_id2, text) values ("+message.getPersonId()+","+
+                    message.getWhosends() + ", '"+message.getText()+"') ";
 
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");

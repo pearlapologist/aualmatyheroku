@@ -87,9 +87,14 @@ public class AddMessage extends HttpServlet {
             JsonObject jsonObject = jsonReader.readObject();
 
             String text = jsonObject.getString("msg");
+            int pers1Id = jsonObject.getInt("p1id");
+             int mailer = jsonObject.getInt("p2id");
+            
 
             Message msg = new Message();
             msg.setText(text);
+            msg.setPersonId(pers1Id);
+            msg.setWhosends(mailer);
             
             DbHelper db = new DbHelper();
             db.addMessage(msg);
