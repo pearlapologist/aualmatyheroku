@@ -112,9 +112,7 @@ public class EditProfile extends HttpServlet {
             }
 
             if (request.getParameter("editBirthday") != null) {
-               /* Long b = DataUtils.convertDataToLongWithRawString(request.getParameter("editBirthday"));
-                person.setBirthday(b);*/
-                String b = request.getParameter("editBirthday");
+                Long b = DataUtils.convertDataToLongWithRawString(request.getParameter("editBirthday"));
                 person.setBirthday(b);
             
             }

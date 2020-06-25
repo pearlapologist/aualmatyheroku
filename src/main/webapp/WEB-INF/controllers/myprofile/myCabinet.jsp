@@ -43,11 +43,13 @@
                         Рейтинг: <%=p.getRating()%> <br/>
 
                         <%
-                            String birth = p.getBirthday();
+                            Long lb = p.getBirthday();
+                            String birth = DataUtils.convertLongToDataString(lb);
                         %>
                         Дата рождения: <%=birth%> <br/>
                         <%
-                          String  created =  p.getCreatedDate();
+                            Long lc = p.getCreatedDate();
+                            String created = DataUtils.convertLongToDataString(lc);
                         %>
                         Дата регистрации: <%=created%> <br/>
                         Мои услуги: <br/>
@@ -79,11 +81,13 @@
                             boolean isexecutor = db.getPersonIsExecutorField(p.getId());
                         %> 
 
-                       <a class=" nav-link" href="<%=DataUtils.PATH%><%if (isexecutor == true) {
-                                out.print("MyForm");}
-                                else{
-                           out.print("CreateForm");}
-                            %> ">Анкета</a>
+                        <a class=" nav-link" href="<%=DataUtils.PATH%><%if (isexecutor == true) {
+                                out.print("MyForm");
+                            }
+                            else {
+                                out.print("CreateForm");
+                            }
+                           %> ">Анкета</a>
                         <a class=" nav-link" href="<%=DataUtils.PATH%>MyOrders">Мои заказы</a>
                         <a class=" nav-link" href="<%=DataUtils.PATH%>MyReviews">Мои отзывы</a>
                     </nav>

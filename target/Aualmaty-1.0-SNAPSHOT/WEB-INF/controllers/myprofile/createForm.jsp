@@ -69,9 +69,9 @@
 
         </script>
         <%
-            int l = lokm;
+           /* int l = lokm;
             for(int i=0;i<10;i++){
-            String s =  $("#createformservices p:eq(" + 2 + ")").remove();}
+            String s =  $("#createformservices p:eq(" + 2 + ")").remove();}*/
            // request.setAttribute("createFormServices", services);
         %>
 

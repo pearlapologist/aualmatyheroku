@@ -33,35 +33,7 @@ public class getPersonByNumbNPasswd extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-          PrintWriter out = response.getWriter();
         
-      String passwd = null;
-            String numb = null;
-        try {
-            passwd = request.getParameter("passwd");
-              numb = request.getParameter("num");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        
-        models.DbHelper db = new models.DbHelper();
-        Person person  = db.getPersonByPasswdNNumb(numb, passwd);
-        if(person == null){
-           JsonObjectBuilder objectBuilder = Json.createObjectBuilder().add("errorMessage", "404error");
-            String result = objectBuilder.build().toString();
-            out.print(result);
-            return;
-        }
-         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-          objectBuilder.add("personId", person.getId());
-           objectBuilder.add("name", person.getName());
-            objectBuilder.add("lastname", person.getLastname());
-           objectBuilder.add("number", person.getNumber());
-           
-           JsonObject jsonObject = objectBuilder.build();
-           out.print(jsonObject.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -91,6 +63,38 @@ public class getPersonByNumbNPasswd extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        PrintWriter out = response.getWriter();
+        
+         JsonReader jsonReader = Json.createReader(request.getReader());
+
+            JsonObject jsonObject = jsonReader.readObject();
+
+            String number = jsonObject.getString("numb");
+            String passwd = jsonObject.getString("passwd");
+
+          Person p = new Person();
+            p.setNumber(number);
+            p.setPasswd(passwd);
+
+            models.DbHelper db = new models.DbHelper();
+         Person person = db.getPersonByPasswdNNumb(number, passwd);
+
+        
+        if(person == null){
+           JsonObjectBuilder objectBuilder = Json.createObjectBuilder().add("errorMessage", "404error");
+            String result = objectBuilder.build().toString();
+            out.print(result);
+            return;
+        }
+         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+          objectBuilder.add("personId", person.getId());
+           objectBuilder.add("name", person.getName());
+            objectBuilder.add("lastname", person.getLastname());
+           objectBuilder.add("number", person.getNumber());
+           
+           JsonObject jsonObject2  = objectBuilder.build();
+           out.print(jsonObject2.toString());
     }
 
     /**

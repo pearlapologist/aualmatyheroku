@@ -29,8 +29,8 @@ public class getPersonByNumber extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      PrintWriter out = response.getWriter();
-      String number = "";
+     /*   PrintWriter out = response.getWriter();
+        String number = "";
         try {
             number = request.getParameter("numb");
 
@@ -55,8 +55,8 @@ public class getPersonByNumber extends HttpServlet {
         builderr.add("lastname", p.getLastname());
         builderr.add("number", p.getNumber());
 
-       javax.json.JsonObject jsonObject = builderr.build();
-        out.print(jsonObject.toString());
+        javax.json.JsonObject jsonObject = builderr.build();
+        out.print(jsonObject.toString());*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -85,7 +85,26 @@ public class getPersonByNumber extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         PrintWriter out = response.getWriter();
+        try {
+            javax.json.JsonReader jsonReader = javax.json.Json.createReader(request.getReader());
+
+            javax.json.JsonObject jsonObject = jsonReader.readObject();
+
+            String number = jsonObject.getString("numb");
+            String passwd = jsonObject.getString("passwd");
+
+            models.Person p = new models.Person();
+            p.setNumber(number);
+            p.setPasswd(passwd);
+
+            models.DbHelper db = new models.DbHelper();
+            db.getPersonByPasswdNNumb(number, passwd);
+
+            out.print(p.getId());
+        } catch (Exception e) {
+            out.print("Error: " + e.getMessage());
+        }
     }
 
     /**

@@ -32,9 +32,9 @@ public class AddMessage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-       
 
-      /*  String text = request.getParameter("text");
+
+        /*  String text = request.getParameter("text");
 
         int person1Id = Integer.parseInt(request.getParameter("person1Id"));
         int person2Id = Integer.parseInt(request.getParameter("person2Id"));
@@ -48,8 +48,6 @@ public class AddMessage extends HttpServlet {
         
         db.addMessage(msg);
         out.print(msg.getId());*/
-        
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,27 +76,26 @@ public class AddMessage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
- PrintWriter out = response.getWriter();
 
-      try {
+        PrintWriter out = response.getWriter();
+
+        try {
             JsonReader jsonReader = Json.createReader(request.getReader());
 
             JsonObject jsonObject = jsonReader.readObject();
 
             String text = jsonObject.getString("msg");
             int pers1Id = jsonObject.getInt("p1id");
-             int mailer = jsonObject.getInt("p2id");
-            
+            int mailer = jsonObject.getInt("p2id");
 
             Message msg = new Message();
             msg.setText(text);
             msg.setPersonId(pers1Id);
             msg.setWhosends(mailer);
-            
+
             DbHelper db = new DbHelper();
             db.addMessage(msg);
-            
+
             out.print(msg.getId());
         } catch (Exception e) {
             out.print("Error: " + e.getMessage());

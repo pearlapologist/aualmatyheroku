@@ -91,6 +91,7 @@ public class UpdatePersonById extends HttpServlet {
             String number = jsonObject.getString("numb");
             String passwd = jsonObject.getString("passwd");
             String birthday = jsonObject.getString("pBirthday");
+               Long lb = Long.valueOf(birthday);
             //String photo = jsonObject.getString("photo");
             
            DbHelper db = new DbHelper();
@@ -100,7 +101,7 @@ public class UpdatePersonById extends HttpServlet {
             p.setLastname(lastname);
             p.setNumber(number);
             p.setPasswd(passwd);
-            p.setBirthday(birthday);
+            p.setBirthday(lb);
 
             
             db.updatePerson(p);

@@ -67,11 +67,11 @@
                                 <div>Дата рождения:</div>
                                 <div>
                                     <%
-                                        String l = p.getBirthday();
+                                     Long l = p.getBirthday();
 
                                         String s = "";
                                         if (l != null) {
-                                            s = p.getBirthday();
+                                            s = DataUtils.convertLongToDataString(l);
                                         }
                                     %>
                                     <input type="date" value="<%=s%>" id="editBirthday" name="editBirthday"  />

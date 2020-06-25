@@ -72,13 +72,15 @@ public class AddPerson extends HttpServlet {
             String number = jsonObject.getString("numb");
             String passwd = jsonObject.getString("passwd");
             String birthday = jsonObject.getString("birth");
+            Long lb = Long.valueOf(birthday);
+            
 
           Person p = new Person();
             p.setName(name);
             p.setLastname(lastname);
             p.setNumber(number);
             p.setPasswd(passwd);
-            p.setBirthday(birthday);
+            p.setBirthday(lb);
 
             models.DbHelper db = new models.DbHelper();
             db.addPerson(p);

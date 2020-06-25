@@ -204,6 +204,10 @@
         <servlet-name>DeletePersonById</servlet-name>
         <servlet-class>api.DeletePersonById</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TestAddPerson</servlet-name>
+        <servlet-class>api.TestAddPerson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -403,6 +407,10 @@
     <servlet-mapping>
         <servlet-name>DeletePersonById</servlet-name>
         <url-pattern>/DeletePersonById</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestAddPerson</servlet-name>
+        <url-pattern>/TestAddPerson</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
