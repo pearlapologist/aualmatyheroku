@@ -57,6 +57,11 @@ public class GetPersonById extends HttpServlet {
         builderr.add("name", p.getName());
         builderr.add("lastname", p.getLastname());
         builderr.add("number", p.getNumber());
+         builderr.add("rating", p.getRating());
+         String c = p.getCreatedDate()+"";
+          builderr.add("created",c);
+               String b = p.getBirthday()+"";
+           builderr.add("birth", b);
 
        JsonObject jsonObject = builderr.build();
         out.print(jsonObject.toString());
