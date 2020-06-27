@@ -448,6 +448,29 @@ public class DbHelper {
             ex.printStackTrace();
         }
     }
+    
+     public void updatePersonFromAndr(Person person) {
+        String query = "UPDATE " + TABLE_PERSON + " SET "
+                       + KEY_PERSON_NAME + "=?,"
+                       + KEY_PERSON_LASTNAME + "=?,"
+                       + KEY_PERSON_BIRTHDAY + "=?"
+                       + " WHERE " + KEY_PERSON_ID + "=" + person.getId();
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+            con.setAutoCommit(false);
+            PreparedStatement pstmt = con.prepareStatement(query, Statement.NO_GENERATED_KEYS);
+
+            pstmt.setString(1, person.getName());
+            pstmt.setString(2, person.getLastname());
+            pstmt.setLong(3, person.getBirthday());
+
+            pstmt.executeUpdate();
+
+            con.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void updatePersonRatingById(int personId) {
         int rating = getPersonRatingById(personId);
