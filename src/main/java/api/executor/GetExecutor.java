@@ -58,9 +58,24 @@ public class GetExecutor extends HttpServlet {
         builderr.add("cId",r.getSectionId());
         builderr.add("spec",r.getSpecialztn());
          builderr.add("desc",r.getDescriptn());
+         
+         
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+
+        for (Service s : r.getServices()) {
+            JsonObjectBuilder servicesBuilder = 
+                    Json.createObjectBuilder()
+                    .add("sId", s.getId())
+                     .add("sTitle", s.getTitle())
+                    .add("sPrice", s.getPrice());
+
+            arrayBuilder.add(servicesBuilder);
+        }
+
+        builderr.add("services", arrayBuilder);
 
        JsonObject jsonObject = builderr.build();
-        out.print(jsonObject.toString());
+       out.print(jsonObject.toString());
     
     }
 

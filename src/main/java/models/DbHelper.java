@@ -611,6 +611,7 @@ public class DbHelper {
 
             if (rs.next()) {
                 Executor executor = this.getExecutorFromRS(rs);
+                loadExecutorServices(executor);
                 return executor;
             }
         } catch (Exception sqlEx) {

@@ -84,18 +84,17 @@ public class AddExecutor extends HttpServlet {
             int sectionId = jsonObject.getInt("sectionId");
             String spec = jsonObject.getString("spec");
             String desc = jsonObject.getString("desc");
-            
-           ArrayList rserv = new ArrayList();
-           JsonArray services = jsonObject.getJsonArray("services");
-           
+
+            ArrayList rserv = new ArrayList();
+            JsonArray services = jsonObject.getJsonArray("services");
+
             for (int i = 0; i < services.size(); i++) {
                 JsonObject service = services.getJsonObject(i);
                 String title = service.getString("title");
-                int price= service.getInt("price");
+                int price = service.getInt("price");
                 Service s = new Service(title, price);
                 rserv.add(s);
             }
-            
 
             Executor r = new Executor();
             r.setPersonId(pId);
@@ -113,6 +112,16 @@ public class AddExecutor extends HttpServlet {
         }
     }
 
+    /*
+    {"personId":10,
+    "sectionId":3,
+     "spec":"specialization",
+      "desc":"some text",
+      "services":[{
+       "title":"title1",
+     "price":2000
+       }]}
+     */
     /**
      * Returns a short description of the servlet.
      *

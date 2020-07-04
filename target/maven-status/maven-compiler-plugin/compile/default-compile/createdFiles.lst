@@ -1,6 +1,7 @@
 models\Entity.class
 controllers\Orders.class
 com\mycompany\aualmaty\resources\JavaEE8Resource.class
+api\executor\AddExecutor.class
 controllers\questions\Questions.class
 models\DbHelper.class
 test\TestStyle.class
@@ -20,6 +21,7 @@ test\TestOrder.class
 api\getConversationAllMessages.class
 models\Notify.class
 controllers\myprofile\DeleteCurPersonPhoto.class
+api\executor\GetExecutor.class
 test\AddMessage.class
 models\Answer.class
 controllers\Profile.class

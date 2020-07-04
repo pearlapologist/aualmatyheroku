@@ -3,6 +3,7 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\auth\Logout.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Order.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\DeletePersonById.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\executor\AddExecutor.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\DeleteCurPersonPhoto.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\GetPersonById.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestAddService.java
@@ -32,6 +33,7 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\Up
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\MyForm.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestStyle.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestUpload.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\executor\GetExecutor.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Person.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\CreateOrder.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\SetPersonIsExecutorField.java
