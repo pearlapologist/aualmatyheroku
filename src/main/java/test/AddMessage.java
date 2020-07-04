@@ -34,20 +34,7 @@ public class AddMessage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
 
-        /*  String text = request.getParameter("text");
-
-        int person1Id = Integer.parseInt(request.getParameter("person1Id"));
-        int person2Id = Integer.parseInt(request.getParameter("person2Id"));
-
-        DbHelper db = new DbHelper();
-        
-        Message msg = new Message();
-        msg.setPersonId(person1Id);
-        msg.setWhosends(person2Id);
-        msg.setText(text);
-        
-        db.addMessage(msg);
-        out.print(msg.getId());*/
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

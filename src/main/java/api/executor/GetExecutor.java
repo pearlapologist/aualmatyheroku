@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api;
+package api.executor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import models.*;
  *
  * @author bayan
  */
-public class AddPerson extends HttpServlet {
+public class GetExecutor extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +32,36 @@ public class AddPerson extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+      PrintWriter out = response.getWriter();
+        int id = -1;
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        models.DbHelper db = new models.DbHelper();
+       Executor r = db.getExecutor(id);
+
+        if (r == null) {
+            javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder().
+                    add("Ошибка", "Специалист не найден");
+            out.print(objectBuilder.build().toString());
+            return;
+        }
+
+        JsonObjectBuilder builderr = Json.createObjectBuilder();
+
+        builderr.add("id", r.getId());
+        builderr.add("pId", r.getPersonId());
+        builderr.add("cId",r.getSectionId());
+        builderr.add("spec",r.getSpecialztn());
+         builderr.add("desc",r.getDescriptn());
+
+       JsonObject jsonObject = builderr.build();
+        out.print(jsonObject.toString());
+    
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,6 +76,7 @@ public class AddPerson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -60,36 +90,7 @@ public class AddPerson extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-
-        try {
-           JsonReader jsonReader = Json.createReader(request.getReader());
-
-            JsonObject jsonObject = jsonReader.readObject();
-
-           String name = jsonObject.getString("name");
-            String lastname = jsonObject.getString("lastname");
-            String number = jsonObject.getString("numb");
-            String passwd = jsonObject.getString("passwd");
-            String birthday = jsonObject.getString("birth");
-            Long lb = Long.valueOf(birthday);
-            
-
-          Person p = new Person();
-            p.setName(name);
-            p.setLastname(lastname);
-            p.setNumber(number);
-            p.setPasswd(passwd);
-            p.setBirthday(lb);
-          
-
-            models.DbHelper db = new models.DbHelper();
-            db.addPerson(p);
-
-            out.print(p.getId());
-        } catch (Exception e) {
-            out.print("Error: " + e.getMessage());
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -192,21 +192,20 @@ public class DbHelper {
 
 // <editor-fold defaultstate="collapsed" desc="Person">
     public void addPerson(Person person) {
-
         String pphoto = person.getPhoto();
         if (pphoto == null) {
             pphoto = "executors_default_image.png";
         }
          String query = "INSERT INTO " + TABLE_PERSON + "(" + KEY_PERSON_NAME + ", " + KEY_PERSON_LASTNAME + ", " + KEY_PERSON_NUMBER
                        + ", " + KEY_PERSON_PASSWD + ", " + KEY_PERSON_CREATED_DATE + ", " + KEY_PERSON_PHOTO + ", " + KEY_PERSON_BIRTHDAY
+                         + ", " + KEY_PERSON_RATING + ", " + KEY_PERSON_ISEXECUTOR
                        + ") VALUES ('" + person.getName() + "','"
                        + person.getLastname() + "','"
                        + person.getNumber() + "','"
                        + person.getPasswd() + "',"
                        + person.getCreatedDate() + ",'"
                        + pphoto + "',"
-                       + person.getBirthday() + ")";
-        /*String query = "insert into persons(person_passw, person_number) values ('"+person.getNumber()+"','"+person.getPasswd()+"')";*/
+                       + person.getBirthday()+ "," + 0 + "," + 0 + ")";
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
 

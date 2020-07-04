@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api;
+package api.executor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
 import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import models.*;
  *
  * @author bayan
  */
-public class AddPerson extends HttpServlet {
+public class AddExecutor extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +33,18 @@ public class AddPerson extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddExecutor</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddExecutor at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,6 +59,7 @@ public class AddPerson extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**
@@ -63,30 +76,38 @@ public class AddPerson extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-           JsonReader jsonReader = Json.createReader(request.getReader());
+            javax.json.JsonReader jsonReader = javax.json.Json.createReader(request.getReader());
 
             JsonObject jsonObject = jsonReader.readObject();
 
-           String name = jsonObject.getString("name");
-            String lastname = jsonObject.getString("lastname");
-            String number = jsonObject.getString("numb");
-            String passwd = jsonObject.getString("passwd");
-            String birthday = jsonObject.getString("birth");
-            Long lb = Long.valueOf(birthday);
+            int pId = jsonObject.getInt("personId");
+            int sectionId = jsonObject.getInt("sectionId");
+            String spec = jsonObject.getString("spec");
+            String desc = jsonObject.getString("desc");
+            
+           ArrayList rserv = new ArrayList();
+           JsonArray services = jsonObject.getJsonArray("services");
+           
+            for (int i = 0; i < services.size(); i++) {
+                JsonObject service = services.getJsonObject(i);
+                String title = service.getString("title");
+                int price= service.getInt("price");
+                Service s = new Service(title, price);
+                rserv.add(s);
+            }
             
 
-          Person p = new Person();
-            p.setName(name);
-            p.setLastname(lastname);
-            p.setNumber(number);
-            p.setPasswd(passwd);
-            p.setBirthday(lb);
-          
+            Executor r = new Executor();
+            r.setPersonId(pId);
+            r.setSectionId(sectionId);
+            r.setSpecialztn(spec);
+            r.setDescriptn(desc);
+            r.setServices(rserv);
 
             models.DbHelper db = new models.DbHelper();
-            db.addPerson(p);
+            db.addExecutor(r);
 
-            out.print(p.getId());
+            out.print(r.getId());
         } catch (Exception e) {
             out.print("Error: " + e.getMessage());
         }

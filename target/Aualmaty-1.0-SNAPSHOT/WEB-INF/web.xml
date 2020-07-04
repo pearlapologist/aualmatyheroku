@@ -208,6 +208,14 @@
         <servlet-name>TestAddPerson</servlet-name>
         <servlet-class>api.TestAddPerson</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddExecutor</servlet-name>
+        <servlet-class>api.executor.AddExecutor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetExecutor</servlet-name>
+        <servlet-class>api.executor.GetExecutor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -411,6 +419,14 @@
     <servlet-mapping>
         <servlet-name>TestAddPerson</servlet-name>
         <url-pattern>/TestAddPerson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddExecutor</servlet-name>
+        <url-pattern>/AddExecutor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetExecutor</servlet-name>
+        <url-pattern>/GetExecutor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
