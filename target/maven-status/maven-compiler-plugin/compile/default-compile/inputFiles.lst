@@ -10,8 +10,10 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\T
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\questions\Questions.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Order_search.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestDeleteImage.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\section\GetSectionIdByTitle.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\CreateForm.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\AddMessage.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\executor\deleteExecutor.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\getPersonByNumber.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\DataUtils.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestExecutorServices.java
@@ -31,6 +33,7 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\T
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\TestAddPerson.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\UpdatePersonRatingById.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\MyForm.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\section\GetSection.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestStyle.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestUpload.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\executor\GetExecutor.java
@@ -47,11 +50,13 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Account.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Section.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\Mavens.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\executor\UpdateExecutor.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestAllPersons.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Review.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\Quiziz.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\Result.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Response.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\executor\GetExecutorsBySectionId.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\CreateFormAddService.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\EditProfileSettings.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\SeparateOrder.java
@@ -61,9 +66,11 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\G
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\GetPersonIsExecutorFiels.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\questions\QuestionAdd.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\NewResponse.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\section\GetSectionListInString.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestAllExecutors.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\myprofile\AddService.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Service.java
+C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\executor\GetAllExecutors.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Question.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\GetAllPersonConversationsById.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\controllers\EditProfile.java

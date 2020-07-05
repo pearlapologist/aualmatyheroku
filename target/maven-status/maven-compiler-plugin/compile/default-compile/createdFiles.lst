@@ -1,3 +1,4 @@
+api\section\GetSectionListInString.class
 models\Entity.class
 controllers\Orders.class
 com\mycompany\aualmaty\resources\JavaEE8Resource.class
@@ -8,6 +9,7 @@ test\TestStyle.class
 models\DataUtils.class
 controllers\myprofile\CreateFormAddService.class
 models\Person.class
+api\executor\UpdateExecutor.class
 controllers\myprofile\EditProfileSettings.class
 controllers\Mavens.class
 models\Bookmarks.class
@@ -23,16 +25,20 @@ models\Notify.class
 controllers\myprofile\DeleteCurPersonPhoto.class
 api\executor\GetExecutor.class
 test\AddMessage.class
+api\section\GetSectionIdByTitle.class
 models\Answer.class
 controllers\Profile.class
 controllers\Result.class
+api\executor\deleteExecutor.class
 test\GetAllMessages.class
 controllers\auth\Signup.class
 models\Section.class
 models\Response.class
+api\section\GetSection.class
 test\TestAllPersons.class
 api\GetPersonById.class
 api\GetPersonIsExecutorFiels.class
+api\executor\GetExecutorsBySectionId.class
 models\Account.class
 models\Review.class
 api\getPersonByNumbNPasswd.class
@@ -58,6 +64,7 @@ controllers\Quiziz.class
 controllers\NewResponse.class
 api\UpdatePersonRatingById.class
 test\TestAllExecutors.class
+api\executor\GetAllExecutors.class
 controllers\questions\QuestionAdd.class
 getPersonByNumber.class
 api\GetPersonRatingById.class

@@ -216,6 +216,34 @@
         <servlet-name>GetExecutor</servlet-name>
         <servlet-class>api.executor.GetExecutor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllExecutors</servlet-name>
+        <servlet-class>api.executor.GetAllExecutors</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetExecutorsBySectionId</servlet-name>
+        <servlet-class>api.executor.GetExecutorsBySectionId</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateExecutor</servlet-name>
+        <servlet-class>api.executor.UpdateExecutor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteExecutor</servlet-name>
+        <servlet-class>api.executor.deleteExecutor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetSection</servlet-name>
+        <servlet-class>api.section.GetSection</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetSectionIdByTitle</servlet-name>
+        <servlet-class>api.section.GetSectionIdByTitle</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetSectionListInString</servlet-name>
+        <servlet-class>api.section.GetSectionListInString</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -427,6 +455,34 @@
     <servlet-mapping>
         <servlet-name>GetExecutor</servlet-name>
         <url-pattern>/GetExecutor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllExecutors</servlet-name>
+        <url-pattern>/GetAllExecutors</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetExecutorsBySectionId</servlet-name>
+        <url-pattern>/GetExecutorsBySectionId</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateExecutor</servlet-name>
+        <url-pattern>/UpdateExecutor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteExecutor</servlet-name>
+        <url-pattern>/deleteExecutor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSection</servlet-name>
+        <url-pattern>/GetSection</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSectionIdByTitle</servlet-name>
+        <url-pattern>/GetSectionIdByTitle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSectionListInString</servlet-name>
+        <url-pattern>/GetSectionListInString</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

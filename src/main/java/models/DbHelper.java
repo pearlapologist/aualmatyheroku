@@ -196,16 +196,16 @@ public class DbHelper {
         if (pphoto == null) {
             pphoto = "executors_default_image.png";
         }
-         String query = "INSERT INTO " + TABLE_PERSON + "(" + KEY_PERSON_NAME + ", " + KEY_PERSON_LASTNAME + ", " + KEY_PERSON_NUMBER
+        String query = "INSERT INTO " + TABLE_PERSON + "(" + KEY_PERSON_NAME + ", " + KEY_PERSON_LASTNAME + ", " + KEY_PERSON_NUMBER
                        + ", " + KEY_PERSON_PASSWD + ", " + KEY_PERSON_CREATED_DATE + ", " + KEY_PERSON_PHOTO + ", " + KEY_PERSON_BIRTHDAY
-                         + ", " + KEY_PERSON_RATING + ", " + KEY_PERSON_ISEXECUTOR
+                       + ", " + KEY_PERSON_RATING + ", " + KEY_PERSON_ISEXECUTOR
                        + ") VALUES ('" + person.getName() + "','"
                        + person.getLastname() + "','"
                        + person.getNumber() + "','"
                        + person.getPasswd() + "',"
                        + person.getCreatedDate() + ",'"
                        + pphoto + "',"
-                       + person.getBirthday()+ "," + 0 + "," + 0 + ")";
+                       + person.getBirthday() + "," + 0 + "," + 0 + ")";
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -447,8 +447,8 @@ public class DbHelper {
             ex.printStackTrace();
         }
     }
-    
-     public void updatePersonFromAndr(Person person) {
+
+    public void updatePersonFromAndr(Person person) {
         String query = "UPDATE " + TABLE_PERSON + " SET "
                        + KEY_PERSON_NAME + "=?,"
                        + KEY_PERSON_LASTNAME + "=?,"
@@ -488,7 +488,7 @@ public class DbHelper {
         }
     }
 
-    public void setPersonIsExecutorField(int personId, Boolean b) {
+    public void setPersonIsExecutorField(int personId, Boolean b) throws Exception{
         int value;
         if (b == true) {
             value = 1;
@@ -504,9 +504,7 @@ public class DbHelper {
 
             Statement stmt = con.createStatement();
             stmt.execute(query);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        } 
     }
 
     public void deletePerson(int personId) {
@@ -634,6 +632,7 @@ public class DbHelper {
 
             while (rs.next()) {
                 Executor executor = this.getExecutorFromRS(rs);
+                loadExecutorServices(executor);
                 result.add(executor);
             }
         } catch (Exception sqlEx) {
@@ -656,6 +655,7 @@ public class DbHelper {
 
             while (rs.next()) {
                 Executor executor = this.getExecutorFromRS(rs);
+                this.loadExecutorServices(executor);
                 result.add(executor);
             }
         } catch (Exception sqlEx) {
@@ -750,7 +750,6 @@ public class DbHelper {
         String query = "UPDATE " + TABLE_EXECUTOR + " SET "
                        + KEY_EXECUTOR_SPECIALIZATION + "='" + executor.getSpecialztn() + "', "
                        + KEY_EXECUTOR_DESCRIPTION + "=' " + executor.getDescriptn() + "', "
-                       + KEY_EXECUTOR_PERSON_ID + "= " + executor.getPersonId() + ", "
                        + KEY_EXECUTOR_SECTION_ID + "= " + executor.getSectionId()
                        + " WHERE " + KEY_EXECUTOR_ID + "=" + executor.getId();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
@@ -759,7 +758,7 @@ public class DbHelper {
             stmt.execute(query);
 
             updateExecutorServices(executor);
-            updateExecutorServices(executor);
+            updateExecutorNServices(executor);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -767,16 +766,17 @@ public class DbHelper {
     }
 
     public void deleteExecutor(int executorId) {
-        String query = "DELETE * FROM " + TABLE_EXECUTOR + " WHERE "
+        String query = "DELETE  FROM " + TABLE_EXECUTOR + " WHERE "
                        + KEY_EXECUTOR_ID + "=" + executorId;
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
-
+            Statement stmt = con.createStatement();
             int personId = getPersonIdByExecutorId(executorId);
             setPersonIsExecutorField(personId, false);
             onExecutorDelete(executorId);
-
-            Statement stmt = con.createStatement();
+            deleteExecutorServices(executorId);
+            deleteFromExecutorNServicesByExecutorId(executorId);
+            
             stmt.execute(query);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1089,32 +1089,22 @@ public class DbHelper {
 
     public void loadExecutorServices(Executor executor) {
 
-        String sql = "SELECT " + TABLE_SERVICE + "." + KEY_SERVICE_ID + ", "
+      /*  String sql = "SELECT " + TABLE_SERVICE + "." + KEY_SERVICE_ID + ", "
                      + TABLE_SERVICE + "." + KEY_SERVICE_TITLE + ", " + TABLE_SERVICE + "." + KEY_SERVICE_PRICE
                      + " FROM "
                      + TABLE_SERVICE + " JOIN " + TABLE_EXECUTORNSERVICES + " ON "
                      + TABLE_SERVICE + "." + KEY_SERVICE_ID + "=" + TABLE_EXECUTORNSERVICES
                      + "." + KEY_EXECUTORNSERVICES_SERVICE_ID + " WHERE " + TABLE_EXECUTORNSERVICES
-                     + "." + KEY_EXECUTORNSERVICES_EXECUTOR_ID + "=" + executor.getId();
+                     + "." + KEY_EXECUTORNSERVICES_EXECUTOR_ID + "=" + executor.getId();*/
+      String sql = "select * from service where service_id in (select serviceId from executornservices where executorId = "+ executor.getId()+" )";
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-
-//SELECT distinct Service.ed, service.title, service.price from service
-/*join executernservices
-on service._id = executernservices.serviceid
-where executernservices.executorid = executorid
-             */
             if (executor.getServices() != null && !(executor.getServices().isEmpty())) {
                 executor.getServices().clear();
             }
             while (rs.next()) {
-// String serviceTitle = c2.getString(1);
-// int serviceId = c2.getInt(2);
-// Service service = new Service();
-// service.setId(serviceId);
-//service.setTitle(serviceTitle);
                 Service service = new Service(rs.getInt(KEY_SERVICE_ID), rs.getString(KEY_SERVICE_TITLE), rs.getDouble(KEY_SERVICE_PRICE));
                 executor.getServices().add(service);
             }
@@ -1235,24 +1225,25 @@ where executernservices.executorid = executorid
             return;
         }
 
-        String sql = "DELETE FROM " + TABLE_EXECUTORNSERVICES
-                     + " WHERE " + KEY_EXECUTORNSERVICES_EXECUTOR_ID + "=" + executor.getId();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
-            stmt.execute(sql);
 
-//SELECT distinct Service.ed, service.title, service.price from service
-/*join executernservices
-on service._id = executernservices.serviceid
-where executernservices.executorid = executorid
-             */
             deleteExecutorServices(executor.getId());
             for (Service service : executor.getServices()) {
-                sql = "INSERT INTO " + TABLE_EXECUTORNSERVICES + "("
-                      + KEY_EXECUTORNSERVICES_EXECUTOR_ID + ", " + KEY_EXECUTORNSERVICES_SERVICE_ID
-                      + ") VALUES (" + executor.getId() + ", " + service.getId() + ")";
-                stmt.execute(sql);
+                String sql2 = "INSERT INTO " + TABLE_SERVICE + "("
+                              + KEY_SERVICE_PRICE + ", " + KEY_SERVICE_TITLE
+                              + ") VALUES (" + service.getPrice() + ", '" + service.getTitle() + "')";
+                stmt.execute(sql2);
+
+                String sqlMaxId = "SELECT MAX(" + KEY_SERVICE_ID + ") FROM "
+                                  + TABLE_SERVICE;
+                int maxId = 0;
+                ResultSet rs = stmt.executeQuery(sqlMaxId);
+                if (rs.first()) {
+                    maxId = rs.getInt(1);
+                }
+                service.setId(maxId);
             }
         } catch (Exception sqlEx) {
             sqlEx.printStackTrace();
@@ -1714,7 +1705,7 @@ where executernservices.executorid = executorid
         }
     }
 
-    public int getPersonIdByExecutorId(int executorId) {
+    public int getPersonIdByExecutorId(int executorId) throws Exception {
         Executor r = this.getExecutor(executorId);
         if (r == null) {
             return -1;
@@ -1732,14 +1723,13 @@ where executernservices.executorid = executorid
             if (rs.first()) {
                 rId = rs.getInt(1);
             }
-        } catch (Exception sqlEx) {
-            sqlEx.printStackTrace();
+        } finally {
+            return rId;
         }
 
-        return rId;
     }
 
-    public void onExecutorDelete(int executorId) {
+    public void onExecutorDelete(int executorId) throws Exception{
         String query = "DELETE FROM " + TABLE_EXECUTORNPERSON + " WHERE "
                        + KEY_EXECUTORNPERSON_EXECUTOR_ID + " = "
                        + executorId;
@@ -1749,9 +1739,7 @@ where executernservices.executorid = executorid
             Statement stmt = con.createStatement();
             stmt.execute(query);
 
-        } catch (Exception sqlEx) {
-            sqlEx.printStackTrace();
-        }
+        } 
     }
 
 //</editor-fold>

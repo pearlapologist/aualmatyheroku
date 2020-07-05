@@ -54,8 +54,10 @@ public class SetPersonIsExecutorField extends HttpServlet {
             b = true;
         }
 
-        db.setPersonIsExecutorField(id, b);
-    }
+      try{  db.setPersonIsExecutorField(id, b); }catch(Exception e){
+      e.printStackTrace();
+      }
+   }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
