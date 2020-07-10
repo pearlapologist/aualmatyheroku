@@ -12,7 +12,7 @@ import java.util.*;
  * @author bayan
  */
 class Review {
-  private  int id;
+  /*private  int id;
     private int executrId;
     private int customerId; //personId
     private String review_text;
@@ -20,6 +20,8 @@ class Review {
     private Long createdDate;
     private ArrayList<Answer> answers;
 
+    public Review(){};
+    
     public Review(int id, int executrId, int customerId,  String review_text, int assessment) {
         this.id = id;
         this.executrId = executrId;
@@ -38,10 +40,7 @@ class Review {
         this.createdDate = DataUtils.getCurentDateInLong();
         answers = new ArrayList<>();
     }
-
-
-    public Review(){
-    }
+    
     public int getExecutrId() {
         return executrId;
     }
@@ -104,5 +103,5 @@ class Review {
 
     public void setAnswers(ArrayList<Answer> answers) {
         this.answers = answers;
-    }
+    }*/
 }

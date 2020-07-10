@@ -54,7 +54,6 @@ public class GetSection extends HttpServlet {
 
         JsonObjectBuilder builderr = Json.createObjectBuilder();
 
-        builderr.add("id", r.getId());
         builderr.add("title", r.getTitle());
 
         JsonObject jsonObject = builderr.build();

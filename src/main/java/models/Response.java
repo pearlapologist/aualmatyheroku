@@ -10,12 +10,13 @@ package models;
  * @author bayan
  */
 public class Response {
+
     private int id;
     private int orderId;
     private int personId;
     private double price;
-   private String text;
-     private Long createdDate;
+    private String text;
+    private Long createdDate;
 
     public Response(int id, int orderId, int personId, double price, String text) {
         this.id = id;
@@ -24,8 +25,17 @@ public class Response {
         this.price = price;
         this.text = text;
     }
-   
-   public Response(){}
+
+    public Response(int orderId, int personId, String text, Double price) {
+        this.orderId = orderId;
+        this.personId = personId;
+        this.text = text;
+        this.price = price;
+        this.createdDate = DataUtils.getCurentDateInLong();
+    }
+
+    public Response() {
+    }
 
     public int getId() {
         return id;
@@ -42,8 +52,6 @@ public class Response {
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
-    
-    
 
     public int getPersonId() {
         return personId;
@@ -76,6 +84,5 @@ public class Response {
     public void setCreatedDate(Long createdDate) {
         this.createdDate = createdDate;
     }
-   
-   
+
 }

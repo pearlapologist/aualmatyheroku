@@ -10,7 +10,7 @@ package models;
  * @author bayan
  */
 class Answer {
-   private  int id;
+  /* private  int id;
     int reviewId;
     private int whoanswersId;
     private int whopostedId; //personId
@@ -45,7 +45,13 @@ class Answer {
     public void setId(int id) {
         this.id = id;
     }
+ public int getReviewId() {
+        return reviewId;
+    }
 
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
+    }
     public int getWhoanswersId() {
         return whoanswersId;
     }
@@ -78,11 +84,5 @@ class Answer {
         this.createdDate = createdDate;
     }
 
-    public int getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
-    }
+   */
 }

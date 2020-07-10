@@ -1,6 +1,12 @@
 
 api
+api.answer
+api.bookmark
 api.executor
+api.notify
+api.order
+api.response
+api.review
 api.section
 com.mycompany.aualmaty
 com.mycompany.aualmaty.resources

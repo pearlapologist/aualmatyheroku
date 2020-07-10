@@ -37,7 +37,7 @@ public class UpdatePersonById extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdatePersonById</title>");            
+            out.println("<title>Servlet UpdatePersonById</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UpdatePersonById at " + request.getContextPath() + "</h1>");
@@ -72,34 +72,33 @@ public class UpdatePersonById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            PrintWriter out = response.getWriter();
-           int id =-1;
+        PrintWriter out = response.getWriter();
+        int id = -1;
         try {
-            id= Integer.parseInt(request.getParameter("id"));
-            
+            id = Integer.parseInt(request.getParameter("id"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        try {
-          JsonReader jsonReader = Json.createReader(request.getReader());
-          
-          JsonObject jsonObject = jsonReader.readObject();
 
-           String name = jsonObject.getString("pName");
+        try {
+            JsonReader jsonReader = Json.createReader(request.getReader());
+
+            JsonObject jsonObject = jsonReader.readObject();
+
+            String name = jsonObject.getString("pName");
             String lastname = jsonObject.getString("pLastname");
             String birthday = jsonObject.getString("pBirthday");
-               Long lb = Long.valueOf(birthday);
+            Long lb = Long.valueOf(birthday);
             //String photo = jsonObject.getString("photo");
-            
-           DbHelper db = new DbHelper();
 
-          Person p = db.getPerson(id);
+            DbHelper db = new DbHelper();
+
+            Person p = db.getPerson(id);
             p.setName(name);
             p.setLastname(lastname);
             p.setBirthday(lb);
 
-            
             db.updatePersonFromAndr(p);
             out.print(p.getId());
         } catch (Exception e) {

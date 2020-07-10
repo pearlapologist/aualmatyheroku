@@ -30,7 +30,7 @@ public class deleteExecutor extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
         int id = -1;
         try {
             id = Integer.parseInt(request.getParameter("id"));
@@ -40,9 +40,9 @@ public class deleteExecutor extends HttpServlet {
         }
 
         try {
-          
+
             models.DbHelper db = new models.DbHelper();
-            
+
             db.deleteExecutor(id);
         } catch (Exception e) {
             out.print("Error: " + e.getMessage());

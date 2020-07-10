@@ -20,7 +20,9 @@ public class Order {
     private String description;
         private boolean isAnonNote;
 
-public Order(){}
+public Order(){
+  this.created_date = DataUtils.getCurentDateInLong();
+}
 
     public Order(int id, String title, int section, double price, String description,Long deadline,  Long created_date) {
         this.id = id;
