@@ -50,7 +50,13 @@ public class GetPersonBookmarkByExecutorId extends HttpServlet {
                 models.DbHelper db = new models.DbHelper();
 
                 int id = db.getPersonBookmarkByExecutorId(personId, executorId);
-                out.print(id);
+
+                javax.json.JsonObjectBuilder builderr = javax.json.Json.createObjectBuilder();
+
+                builderr.add("id", id);
+
+                javax.json.JsonObject jsonObject = builderr.build();
+                out.print(jsonObject.toString());
             } catch (Exception e) {
                 out.print("Error: " + e.getMessage());
             }
