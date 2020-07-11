@@ -1840,19 +1840,20 @@ public class DbHelper {
         String query = "SELECT " + KEY_RESPONSES_PERSON_ID + " FROM " + TABLE_RESPONSES + " WHERE "
                        + KEY_RESPONSES_ORDER_ID + "=" + orderId;
 
-        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Integer> result =  new ArrayList<>();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-
+          
             while (rs.next()) {
-                result.add(rs.getInt(1));
+                result.add(rs.getInt(KEY_RESPONSES_PERSON_ID));
             }
+             return result;
         } catch (Exception sqlEx) {
             sqlEx.printStackTrace();
         }
-        return result;
+        return null;
     }
 
     public ArrayList<Response> getAllOrderResponsesByOrderId(int orderId) {
@@ -2115,11 +2116,12 @@ public class DbHelper {
             if (rs.first()) {
                 answer = getAnswerFromRs(rs);
 
-            }    return answer;
+            }
+            return answer;
         } catch (Exception sqlEx) {
             sqlEx.printStackTrace();
         }
-     return null;
+        return null;
     }
 
     public void updateAnswer(AnswerToReview answer) {

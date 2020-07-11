@@ -44,7 +44,7 @@ public class GetRespondedPersonsIdListByOrderId extends HttpServlet {
       models.DbHelper db = new models.DbHelper();
       ArrayList <Integer> r = db.getRespondedPersonsIdListByOrderId(orderId);
 
-        if (r == null) {
+        if (r == null || r.size() <= 0) {
            javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder().
                     add("Ошибка", "Пользователей не найдено");
             out.print(objectBuilder.build().toString());
