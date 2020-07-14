@@ -7,6 +7,7 @@ controllers\myprofile\CreateFormAddService.class
 models\Person.class
 controllers\myprofile\EditProfileSettings.class
 api\bookmark\GetOrdersListFromPersonBookmarks.class
+api\response\GetPersonIdByResponseId.class
 models\Service.class
 test\CreateOrder.class
 api\AddPerson.class

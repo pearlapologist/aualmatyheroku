@@ -44,6 +44,8 @@ public class GetPersonById extends HttpServlet {
         models.DbHelper db = new models.DbHelper();
         models.Person p = db.getPerson(id);
 
+        int reviewcount = db.getPersonReviewsCount(id);
+
         if (p == null) {
             javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder().
                     add("Ошибка", "Пользователь не найден");
@@ -57,13 +59,14 @@ public class GetPersonById extends HttpServlet {
         builderr.add("name", p.getName());
         builderr.add("lastname", p.getLastname());
         builderr.add("number", p.getNumber());
-         builderr.add("rating", p.getRating());
-         String c = p.getCreatedDate()+"";
-          builderr.add("created",c);
-               String b = p.getBirthday()+"";
-           builderr.add("birth", b);
+        builderr.add("rating", p.getRating());
+        String c = p.getCreatedDate() + "";
+        builderr.add("created", c);
+        String b = p.getBirthday() + "";
+        builderr.add("birth", b);
+        builderr.add("rcount", reviewcount);
 
-       JsonObject jsonObject = builderr.build();
+        JsonObject jsonObject = builderr.build();
         out.print(jsonObject.toString());
     }
 

@@ -381,17 +381,16 @@ public class DbHelper {
     }
 
     public int getPersonRatingById(int id) {
-        String query = "select (select sum(" + KEY_REVIEW_ASSESSMENT + ") from " + TABLE_REVIEWS + " where " + KEY_REVIEW_EXECUTOR_ID
-                       + " = " + id + ")/(select count(" + KEY_REVIEW_CUSTOMER_ID + ") from " + TABLE_REVIEWS + " where " + KEY_REVIEW_EXECUTOR_ID
-                       + " = " + id + ")";
-        int rating = -1;
+        String query = "select sum(" + KEY_REVIEW_ASSESSMENT + ") from " + TABLE_REVIEWS + " where " + KEY_REVIEW_EXECUTOR_ID + " = " + id;
+        int rating = -1;  
+        int count = this.getPersonReviewsCount(id);
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             if (rs.first()) {
-                rating = rs.getInt(1);
+               rating = rs.getInt(1)/count;
             }
         } catch (Exception sqlEx) {
             sqlEx.printStackTrace();
@@ -399,7 +398,26 @@ public class DbHelper {
         return rating;
     }
 
+    public int getPersonReviewsCount(int id) {
+        String query = "select count(" + KEY_REVIEW_CUSTOMER_ID + ") from " + TABLE_REVIEWS + " where " + KEY_REVIEW_EXECUTOR_ID
+                       + " = " + id;
+        int count = -1;
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            if (rs.first()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        return count;
+    }
+
     public String getPersonNumbById(int id) {
+
         String query = "select " + KEY_PERSON_NUMBER + " from " + TABLE_PERSON + " where " + KEY_PERSON_ID
                        + " = " + id;
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
@@ -1840,16 +1858,16 @@ public class DbHelper {
         String query = "SELECT " + KEY_RESPONSES_PERSON_ID + " FROM " + TABLE_RESPONSES + " WHERE "
                        + KEY_RESPONSES_ORDER_ID + "=" + orderId;
 
-        ArrayList<Integer> result =  new ArrayList<>();
+        ArrayList<Integer> result = new ArrayList<>();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-          
+
             while (rs.next()) {
                 result.add(rs.getInt(KEY_RESPONSES_PERSON_ID));
             }
-             return result;
+            return result;
         } catch (Exception sqlEx) {
             sqlEx.printStackTrace();
         }

@@ -45,16 +45,21 @@ public class GetPersonBookmarkByOrderId extends HttpServlet {
             out.print(objectBuilder.build().toString());
             return;
         }
-        else {
-            try {
-                models.DbHelper db = new models.DbHelper();
+        try {
+            models.DbHelper db = new models.DbHelper();
 
-                int id = db.getPersonBookmarkByOrderId(personId, orderId);
-                out.print(id);
-            } catch (Exception e) {
-                out.print("Error: " + e.getMessage());
-            }
+            int id = db.getPersonBookmarkByOrderId(personId, orderId);
+
+            javax.json.JsonObjectBuilder builderr = javax.json.Json.createObjectBuilder();
+
+            builderr.add("id", id);
+
+            javax.json.JsonObject jsonObject = builderr.build();
+            out.print(jsonObject.toString());
+        } catch (Exception e) {
+            out.print("Error: " + e.getMessage());
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
