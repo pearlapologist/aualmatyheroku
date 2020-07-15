@@ -32,8 +32,10 @@ public class DeleteReview extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         int id = -1;
+        int executorId = -1;
         try {
             id = Integer.parseInt(request.getParameter("id"));
+            executorId = Integer.parseInt(request.getParameter("executorId"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,11 +45,11 @@ public class DeleteReview extends HttpServlet {
 
             models.DbHelper db = new models.DbHelper();
 
-            db.deleteReview(id);
+            db.deleteReview(id, executorId);
         } catch (Exception e) {
             out.print("Error: " + e.getMessage());
         }
-        out.print(id);
+        out.print(id+ ", "+ executorId);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

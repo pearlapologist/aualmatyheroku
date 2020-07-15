@@ -1935,6 +1935,7 @@ public class DbHelper {
                 rId = rs.getInt(1);
                 review.setId(rId);
             }
+            this.updatePersonRatingById(review.getExecutrId());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -2026,18 +2027,20 @@ public class DbHelper {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             stmt.execute(query);
+            this.updatePersonRatingById(review.getExecutrId());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public void deleteReview(int id) {
+    public void deleteReview(int id, int executorId) {
         String query = "DELETE FROM " + TABLE_REVIEWS + " WHERE "
                        + KEY_REVIEW_PART_ID + "=" + id;
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             stmt.execute(query);
+         this.updatePersonRatingById(executorId);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -2190,11 +2193,7 @@ public class DbHelper {
     }
 
     public void loadReviewAnswers(ReviewToOrder review) {
-        String query = "SELECT * FROM "
-                       + TABLE_ANSWERS + " JOIN " + TABLE_REVIEWNANSWERS + " ON "
-                       + TABLE_ANSWERS + "." + KEY_ANSWER_PART_ID + "=" + TABLE_REVIEWNANSWERS
-                       + "." + KEY_REVIEWNANSWERS_ANSWER_ID + " WHERE " + TABLE_REVIEWNANSWERS
-                       + "." + KEY_REVIEWNANSWERS_REVIEW_ID + "=" + review.getId();
+        String query = "select * from answers where answer_reviewid = " + review.getId();
 
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
