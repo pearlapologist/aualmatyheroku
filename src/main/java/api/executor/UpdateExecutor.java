@@ -74,6 +74,7 @@ public class UpdateExecutor extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
+          request.setCharacterEncoding("UTF-8");
         int id = -1;
         try {
             id = Integer.parseInt(request.getParameter("id"));
