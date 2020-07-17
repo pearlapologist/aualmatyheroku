@@ -400,6 +400,10 @@
         <servlet-name>GetPersonIdByResponseId</servlet-name>
         <servlet-class>api.response.GetPersonIdByResponseId</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetPersonIdByExecutorId</servlet-name>
+        <servlet-class>api.GetPersonIdByExecutorId</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -795,6 +799,10 @@
     <servlet-mapping>
         <servlet-name>GetPersonIdByResponseId</servlet-name>
         <url-pattern>/GetPersonIdByResponseId</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPersonIdByExecutorId</servlet-name>
+        <url-pattern>/GetPersonIdByExecutorId</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

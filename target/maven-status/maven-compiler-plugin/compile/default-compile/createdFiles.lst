@@ -72,6 +72,7 @@ api\bookmark\PutExecutorInPersonBookmarks.class
 api\review\GetLeavedReviewPersonsIdList.class
 models\DataUtils.class
 api\executor\UpdateExecutor.class
+api\GetPersonIdByExecutorId.class
 controllers\Mavens.class
 models\Bookmarks.class
 controllers\myprofile\MyForm.class
