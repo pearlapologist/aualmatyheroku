@@ -435,7 +435,7 @@ public class DbHelper {
         return null;
     }
 
-    /* public void updatePerson(Person person) {
+     public void updatePerson(Person person) {
         String query = "UPDATE " + TABLE_PERSON + " SET "
                        + KEY_PERSON_NAME + "=?,"
                        + KEY_PERSON_LASTNAME + "=?,"
@@ -465,7 +465,7 @@ public class DbHelper {
             ex.printStackTrace();
         }
     }
-     */
+     
     public String updatePersonFromAndr(Person person) {
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
