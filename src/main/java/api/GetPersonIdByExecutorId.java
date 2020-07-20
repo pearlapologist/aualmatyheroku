@@ -69,7 +69,6 @@ public class GetPersonIdByExecutorId extends HttpServlet {
 
         javax.json.JsonObject jsonObject = builderr.build();
         out.print(jsonObject.toString());
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

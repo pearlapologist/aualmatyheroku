@@ -382,7 +382,7 @@ public class DbHelper {
 
     public int getPersonRatingById(int id) {
         String query = "select sum(" + KEY_REVIEW_ASSESSMENT + ") from " + TABLE_REVIEWS + " where " + KEY_REVIEW_EXECUTOR_ID + " = " + id;
-        int rating = -1;  
+        int rating = -1;
         int count = this.getPersonReviewsCount(id);
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
@@ -390,7 +390,7 @@ public class DbHelper {
             ResultSet rs = stmt.executeQuery(query);
 
             if (rs.first()) {
-               rating = rs.getInt(1)/count;
+                rating = rs.getInt(1) / count;
             }
         } catch (Exception sqlEx) {
             sqlEx.printStackTrace();
@@ -435,7 +435,7 @@ public class DbHelper {
         return null;
     }
 
-    public void updatePerson(Person person) {
+    /* public void updatePerson(Person person) {
         String query = "UPDATE " + TABLE_PERSON + " SET "
                        + KEY_PERSON_NAME + "=?,"
                        + KEY_PERSON_LASTNAME + "=?,"
@@ -465,27 +465,53 @@ public class DbHelper {
             ex.printStackTrace();
         }
     }
-
-    public void updatePersonFromAndr(Person person) {
-        String query = "UPDATE " + TABLE_PERSON + " SET "
-                       + KEY_PERSON_NAME + "=?,"
-                       + KEY_PERSON_LASTNAME + "=?,"
-                       + KEY_PERSON_BIRTHDAY + "=?"
-                       + " WHERE " + KEY_PERSON_ID + "=" + person.getId();
+     */
+    public String updatePersonFromAndr(Person person) {
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
-            con.setAutoCommit(false);
-            PreparedStatement pstmt = con.prepareStatement(query, Statement.NO_GENERATED_KEYS);
 
-            pstmt.setString(1, person.getName());
-            pstmt.setString(2, person.getLastname());
-            pstmt.setLong(3, person.getBirthday());
+            Statement stmt = con.createStatement();
+            String q2 = "select * from persons where person_number = " + person.getNumber();
+            ResultSet rs = stmt.executeQuery(q2);
+            int id = -1;
+            if (rs.first()) {
+                id = rs.getInt(1);
+            }
+            rs.close();
+            
+            if (id != -1) {
+                return "Ошибка: пользователь с таким номером уже зарегистрирован";
+            }
+            
+            else {
+              /*  con.setAutoCommit(false);
+                   String query = "UPDATE " + TABLE_PERSON + " SET "
+                       + KEY_PERSON_NAME + "=?,"
+                       + KEY_PERSON_LASTNAME + "=?,"
+                       + KEY_PERSON_NUMBER + "=?,"
+                       + KEY_PERSON_BIRTHDAY + "=?"
+                       + " WHERE " + KEY_PERSON_ID + "=" + person.getId();
+                PreparedStatement pstmt = con.prepareStatement(query, Statement.NO_GENERATED_KEYS);
 
-            pstmt.executeUpdate();
-
-            con.commit();
+                pstmt.setString(1, person.getName());
+                pstmt.setString(2, person.getLastname());
+                pstmt.setString(3, person.getNumber());
+                pstmt.setLong(4, person.getBirthday());
+                pstmt.executeUpdate();*/
+                
+                
+            String query = "UPDATE " + TABLE_PERSON + " SET "
+                           + KEY_PERSON_NAME + "= '" + person.getName() + "', " 
+                            + KEY_PERSON_LASTNAME + "= '" + person.getLastname() + "', " 
+                            + KEY_PERSON_NUMBER + "= '" + person.getNumber() + "', " 
+                            + KEY_PERSON_BIRTHDAY + "= " + person.getBirthday()
+                           + " WHERE " + KEY_PERSON_ID + "= " + person.getId();
+            stmt.execute(query);
+                return "Изменения сохранены";
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
+            return "Ошибка на сервере: 1";
         }
     }
 
@@ -2040,7 +2066,7 @@ public class DbHelper {
             Class.forName("com.mysql.jdbc.Driver");
             Statement stmt = con.createStatement();
             stmt.execute(query);
-         this.updatePersonRatingById(executorId);
+            this.updatePersonRatingById(executorId);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -32,40 +32,31 @@ public class GetExecutorsBySectionId extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
 
-        int sectionId = -1;
+        int sectionId = 0;
         try {
             sectionId = Integer.parseInt(request.getParameter("sId"));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        
         
         models.DbHelper db = new models.DbHelper();
         java.util.ArrayList<models.Executor> r = db.getExecutorsBySectionId(sectionId);
-
         if (r == null) {
             javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder().
                     add("Ошибка", "Специалистов не найдено");
             out.print(objectBuilder.build().toString());
             return;
         }
-
         javax.json.JsonObjectBuilder builderr = javax.json.Json.createObjectBuilder();
         javax.json.JsonArrayBuilder arrayBuilder = javax.json.Json.createArrayBuilder();
-
         for (models.Executor executor : r) {
             javax.json.JsonObjectBuilder executorBuilderr = javax.json.Json.createObjectBuilder();
-
             executorBuilderr.add("id", executor.getId());
             executorBuilderr.add("pId", executor.getPersonId());
             executorBuilderr.add("cId", executor.getSectionId());
             executorBuilderr.add("spec", executor.getSpecialztn());
             executorBuilderr.add("desc", executor.getDescriptn());
-
             javax.json.JsonArrayBuilder servicesArrayBuilder = javax.json.Json.createArrayBuilder();
-
             for (models.Service s : executor.getServices()) {
                 javax.json.JsonObjectBuilder servicesBuilder
                                              = javax.json.Json.createObjectBuilder()
@@ -75,17 +66,13 @@ public class GetExecutorsBySectionId extends HttpServlet {
 
                 servicesArrayBuilder.add(servicesBuilder);
             }
-
             executorBuilderr.add("services", servicesArrayBuilder);
             arrayBuilder.add(executorBuilderr);
 
         }
-
         builderr.add("executors", arrayBuilder);
-
         javax.json.JsonObject jsonObject = builderr.build();
         out.print(jsonObject.toString());
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

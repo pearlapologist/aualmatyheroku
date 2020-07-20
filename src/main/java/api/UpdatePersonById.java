@@ -72,7 +72,11 @@ public class UpdatePersonById extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+           
         PrintWriter out = response.getWriter();
+         
         int id = -1;
         try {
             id = Integer.parseInt(request.getParameter("id"));
@@ -88,6 +92,7 @@ public class UpdatePersonById extends HttpServlet {
 
             String name = jsonObject.getString("pName");
             String lastname = jsonObject.getString("pLastname");
+            String number = jsonObject.getString("numb");
             String birthday = jsonObject.getString("pBirthday");
             Long lb = Long.valueOf(birthday);
             //String photo = jsonObject.getString("photo");
@@ -97,12 +102,18 @@ public class UpdatePersonById extends HttpServlet {
             Person p = db.getPerson(id);
             p.setName(name);
             p.setLastname(lastname);
+            p.setNumber(number);
             p.setBirthday(lb);
 
-            db.updatePersonFromAndr(p);
-            out.print(p.getId());
+            String r = db.updatePersonFromAndr(p);
+            if (r != null) {
+                out.print(r);
+            }else{
+          out.print("Ошибка на сервере:2");
+            }
         } catch (Exception e) {
-            out.print("Error: " + e.getMessage());
+            out.print("Ошибка на сервере:3");
+            e.printStackTrace();
         }
     }
 
