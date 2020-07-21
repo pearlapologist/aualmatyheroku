@@ -942,6 +942,27 @@ public class DbHelper {
         }
         return result;
     }
+       public ArrayList<Order> getOrdersBySectionIdAndPersonId(int sId, int personId) {
+        String query = "select * from "
+                       + TABLE_ORDERS + " where " + KEY_ORDER_SECTION_ID + " = " + sId + " and " +
+                       KEY_ORDER_CUSTOMER_ID + " = " + personId + " order by " + KEY_ORDER_CREATED_DATE + " desc";
+
+        ArrayList<Order> result = null;
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            result = new ArrayList<>();
+            while (rs.next()) {
+                Order order = getOrderFromRS(rs);
+                result.add(order);
+            }
+        } catch (Exception sqlEx) {
+            sqlEx.printStackTrace();
+        }
+        return result;
+    }
+    
 
     public ArrayList<Order> getPersonOrdersById(int personId) {
         String query = "select * from "
@@ -962,6 +983,8 @@ public class DbHelper {
         }
         return result;
     }
+    
+    
 
     public ArrayList<Order> getOrdersRecords(int start, int total) {
         ArrayList<Order> list = new ArrayList<>();

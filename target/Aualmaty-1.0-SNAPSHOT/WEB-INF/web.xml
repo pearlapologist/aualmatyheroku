@@ -237,14 +237,6 @@
         <servlet-class>api.section.GetSection</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetSectionIdByTitle</servlet-name>
-        <servlet-class>api.section.GetSectionIdByTitle</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>GetSectionListInString</servlet-name>
-        <servlet-class>api.section.GetSectionListInString</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AddOrder</servlet-name>
         <servlet-class>api.order.AddOrder</servlet-class>
     </servlet>
@@ -403,6 +395,10 @@
     <servlet>
         <servlet-name>GetPersonIdByExecutorId</servlet-name>
         <servlet-class>api.GetPersonIdByExecutorId</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetPersonOrdersByIdNSection</servlet-name>
+        <servlet-class>api.order.GetPersonOrdersByIdNSection</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
@@ -637,14 +633,6 @@
         <url-pattern>/GetSection</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetSectionIdByTitle</servlet-name>
-        <url-pattern>/GetSectionIdByTitle</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>GetSectionListInString</servlet-name>
-        <url-pattern>/GetSectionListInString</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AddOrder</servlet-name>
         <url-pattern>/AddOrder</url-pattern>
     </servlet-mapping>
@@ -803,6 +791,10 @@
     <servlet-mapping>
         <servlet-name>GetPersonIdByExecutorId</servlet-name>
         <url-pattern>/GetPersonIdByExecutorId</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetPersonOrdersByIdNSection</servlet-name>
+        <url-pattern>/GetPersonOrdersByIdNSection</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

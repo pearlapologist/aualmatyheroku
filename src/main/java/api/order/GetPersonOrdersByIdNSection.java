@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.section;
+package api.order;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
-import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.*;
 
 /**
  *
  * @author bayan
  */
-public class GetSectionListInString extends HttpServlet {
+public class GetPersonOrdersByIdNSection extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,29 +31,51 @@ public class GetSectionListInString extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
 
-      models.DbHelper db = new models.DbHelper();
-      ArrayList <String> r = db.getSectionsInString();
+        int sectionId = -1;
+       int personId = -1;
+        try {
+            sectionId = Integer.parseInt(request.getParameter("sId"));
+           personId = Integer.parseInt(request.getParameter("id"));
 
-        if (r == null) {
-           JsonObjectBuilder objectBuilder = Json.createObjectBuilder().
-                    add("Ошибка", "Специалистов не найдено");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        models.DbHelper db = new models.DbHelper();
+        java.util.ArrayList<Order> orders = db.getOrdersBySectionIdAndPersonId(sectionId, personId);
+
+        if (orders == null) {
+            javax.json.JsonObjectBuilder objectBuilder = javax.json.Json.createObjectBuilder().
+                    add("Ошибка", "Заказов не найдено");
             out.print(objectBuilder.build().toString());
             return;
         }
 
-         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-       JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        javax.json.JsonObjectBuilder builderr = javax.json.Json.createObjectBuilder();
+        javax.json.JsonArrayBuilder arrayBuilder = javax.json.Json.createArrayBuilder();
 
-        for (String s : r) {
-               arrayBuilder.add(s);
+        for (Order r : orders) {
+            javax.json.JsonObjectBuilder orderBuilderr = javax.json.Json.createObjectBuilder();
+
+            orderBuilderr.add("id", r.getId());
+            orderBuilderr.add("title", r.getTitle());
+            orderBuilderr.add("customer", r.getCustomerId());
+            orderBuilderr.add("price", r.getPrice());
+            orderBuilderr.add("desc", r.getDescription());
+            String b = r.getDeadline() + "";
+            orderBuilderr.add("dealine", b);
+            String c = r.getCreated_date() + "";
+            orderBuilderr.add("created", c);
+
+            arrayBuilder.add(orderBuilderr);
         }
 
-       objectBuilder.add("sections", arrayBuilder.build());
-       
-        out.print(objectBuilder.build().toString());
+        builderr.add("orders", arrayBuilder);
 
+        javax.json.JsonObject jsonObject = builderr.build();
+        out.print(jsonObject.toString());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
