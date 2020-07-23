@@ -400,6 +400,14 @@
         <servlet-name>GetPersonOrdersByIdNSection</servlet-name>
         <servlet-class>api.order.GetPersonOrdersByIdNSection</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdatePersonNumber</servlet-name>
+        <servlet-class>api.UpdatePersonNumber</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePersonPsswd</servlet-name>
+        <servlet-class>api.UpdatePersonPsswd</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -795,6 +803,14 @@
     <servlet-mapping>
         <servlet-name>GetPersonOrdersByIdNSection</servlet-name>
         <url-pattern>/GetPersonOrdersByIdNSection</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePersonNumber</servlet-name>
+        <url-pattern>/UpdatePersonNumber</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePersonPsswd</servlet-name>
+        <url-pattern>/UpdatePersonPsswd</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

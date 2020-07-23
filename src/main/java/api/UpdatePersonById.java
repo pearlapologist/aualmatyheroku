@@ -92,7 +92,6 @@ public class UpdatePersonById extends HttpServlet {
 
             String name = jsonObject.getString("pName");
             String lastname = jsonObject.getString("pLastname");
-            String number = jsonObject.getString("numb");
             String birthday = jsonObject.getString("pBirthday");
             Long lb = Long.valueOf(birthday);
             //String photo = jsonObject.getString("photo");
@@ -102,7 +101,6 @@ public class UpdatePersonById extends HttpServlet {
             Person p = db.getPerson(id);
             p.setName(name);
             p.setLastname(lastname);
-            p.setNumber(number);
             p.setBirthday(lb);
 
             String r = db.updatePersonFromAndr(p);

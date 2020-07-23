@@ -484,26 +484,9 @@ public class DbHelper {
             }
             
             else {
-              /*  con.setAutoCommit(false);
-                   String query = "UPDATE " + TABLE_PERSON + " SET "
-                       + KEY_PERSON_NAME + "=?,"
-                       + KEY_PERSON_LASTNAME + "=?,"
-                       + KEY_PERSON_NUMBER + "=?,"
-                       + KEY_PERSON_BIRTHDAY + "=?"
-                       + " WHERE " + KEY_PERSON_ID + "=" + person.getId();
-                PreparedStatement pstmt = con.prepareStatement(query, Statement.NO_GENERATED_KEYS);
-
-                pstmt.setString(1, person.getName());
-                pstmt.setString(2, person.getLastname());
-                pstmt.setString(3, person.getNumber());
-                pstmt.setLong(4, person.getBirthday());
-                pstmt.executeUpdate();*/
-                
-                
             String query = "UPDATE " + TABLE_PERSON + " SET "
                            + KEY_PERSON_NAME + "= '" + person.getName() + "', " 
-                            + KEY_PERSON_LASTNAME + "= '" + person.getLastname() + "', " 
-                            + KEY_PERSON_NUMBER + "= '" + person.getNumber() + "', " 
+                            + KEY_PERSON_LASTNAME + "= '" + person.getLastname() + "', "
                             + KEY_PERSON_BIRTHDAY + "= " + person.getBirthday()
                            + " WHERE " + KEY_PERSON_ID + "= " + person.getId();
             stmt.execute(query);
@@ -512,6 +495,36 @@ public class DbHelper {
         } catch (Exception ex) {
             ex.printStackTrace();
             return "Ошибка на сервере: 1";
+        }
+    }
+    
+     public void updatePersonNumberyId(int personId, String number) {
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String query = "UPDATE " + TABLE_PERSON + " SET "
+                           + KEY_PERSON_NUMBER + "= '" + number
+                           + "' WHERE " + KEY_PERSON_ID + "= " + personId;
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+     
+      public void updatePersonPasswordById(int personId, String passwd) {
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String query = "UPDATE " + TABLE_PERSON + " SET "
+                           + KEY_PERSON_PASSWD + "= '" + passwd
+                           + "' WHERE " + KEY_PERSON_ID + "= " + personId;
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
