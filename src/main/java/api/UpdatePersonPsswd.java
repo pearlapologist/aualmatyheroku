@@ -85,10 +85,15 @@ public class UpdatePersonPsswd extends HttpServlet {
 
             models.DbHelper db = new models.DbHelper();
 
-            db.updatePersonPasswordById(id, psswd);
-            out.print(id + "");
+           String r = db.updatePersonPasswordById(id, psswd);
+            if (r != null) {
+                out.print(r);
+            }
+            else {
+                out.print("Ошибка на сервере:2");
+            }
         } catch (Exception e) {
-            out.print("Ошибка на сервере");
+            out.print("Ошибка на сервере: 3");
             e.printStackTrace();
         }
         /*

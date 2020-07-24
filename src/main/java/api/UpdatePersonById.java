@@ -98,19 +98,16 @@ public class UpdatePersonById extends HttpServlet {
 
             DbHelper db = new DbHelper();
 
-            Person p = db.getPerson(id);
+            Person p = new Person();
+            p.setId(id);
             p.setName(name);
             p.setLastname(lastname);
             p.setBirthday(lb);
 
-            String r = db.updatePersonFromAndr(p);
-            if (r != null) {
-                out.print(r);
-            }else{
-          out.print("Ошибка на сервере:2");
-            }
+           db.updatePersonFromAndr(p);
+          out.print(id);
         } catch (Exception e) {
-            out.print("Ошибка на сервере:3");
+            out.print("Ошибка на сервере");
             e.printStackTrace();
         }
     }

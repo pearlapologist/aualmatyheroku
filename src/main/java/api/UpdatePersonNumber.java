@@ -85,10 +85,15 @@ public class UpdatePersonNumber extends HttpServlet {
 
             models.DbHelper db = new models.DbHelper();
 
-            db.updatePersonNumberyId(id, numb);
-            out.print(id + "");
+            String r = db.updatePersonNumberById(id, numb);
+            if (r != null) {
+                out.print(r);
+            }
+            else {
+                out.print("Ошибка на сервере:2");
+            }
         } catch (Exception e) {
-            out.print("Ошибка на сервере");
+            out.print("Ошибка на сервере: 3");
             e.printStackTrace();
         }
     }

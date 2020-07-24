@@ -435,7 +435,7 @@ public class DbHelper {
         return null;
     }
 
-     public void updatePerson(Person person) {
+    public void updatePerson(Person person) {
         String query = "UPDATE " + TABLE_PERSON + " SET "
                        + KEY_PERSON_NAME + "=?,"
                        + KEY_PERSON_LASTNAME + "=?,"
@@ -465,67 +465,95 @@ public class DbHelper {
             ex.printStackTrace();
         }
     }
-     
-    public String updatePersonFromAndr(Person person) {
+
+    public void updatePersonFromAndr(Person person) {
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+
+            String query = "UPDATE " + TABLE_PERSON + " SET "
+                           + KEY_PERSON_NAME + "= '" + person.getName() + "', "
+                           + KEY_PERSON_LASTNAME + "= '" + person.getLastname() + "', "
+                           + KEY_PERSON_BIRTHDAY + "= " + person.getBirthday()
+                           + " WHERE " + KEY_PERSON_ID + "= " + person.getId();
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public String updatePersonNumberById(int personId, String number) {
+        String r = null;
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
 
             Statement stmt = con.createStatement();
-            String q2 = "select * from persons where person_number = " + person.getNumber();
+
+            String q2 = "select * from persons where person_number = " + number;
             ResultSet rs = stmt.executeQuery(q2);
             int id = -1;
             if (rs.first()) {
                 id = rs.getInt(1);
             }
             rs.close();
-            
+
             if (id != -1) {
-                return "Ошибка: пользователь с таким номером уже зарегистрирован";
+                r = "Ошибка: пользователь с таким номером уже зарегистрирован";
             }
-            
+
             else {
-            String query = "UPDATE " + TABLE_PERSON + " SET "
-                           + KEY_PERSON_NAME + "= '" + person.getName() + "', " 
-                            + KEY_PERSON_LASTNAME + "= '" + person.getLastname() + "', "
-                            + KEY_PERSON_BIRTHDAY + "= " + person.getBirthday()
-                           + " WHERE " + KEY_PERSON_ID + "= " + person.getId();
-            stmt.execute(query);
-                return "Изменения сохранены";
+                String query = "UPDATE " + TABLE_PERSON + " SET "
+                               + KEY_PERSON_NUMBER + "= '" + number
+                               + "' WHERE " + KEY_PERSON_ID + "= " + personId;
+
+                stmt.execute(query);
+                r = "Изменения сохранены";
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            return "Ошибка на сервере: 1";
+            r = "Ошибка на сервере: 1";
         }
+        return r;
     }
-    
-     public void updatePersonNumberyId(int personId, String number) {
+
+    public String updatePersonPasswordById(int personId, String passwd) {
+        String r = null;
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
 
-            String query = "UPDATE " + TABLE_PERSON + " SET "
-                           + KEY_PERSON_NUMBER + "= '" + number
-                           + "' WHERE " + KEY_PERSON_ID + "= " + personId;
-
             Statement stmt = con.createStatement();
-            stmt.execute(query);
+
+            String q2 = "select " + KEY_PERSON_PASSWD + " from persons where " + KEY_PERSON_ID + " = " + personId;
+            ResultSet rs = stmt.executeQuery(q2);
+            String ps = null;
+            if (rs.first()) {
+                ps = rs.getString(1);
+            }
+            rs.close();
+
+            if (ps != null) {
+                if (ps.equals(passwd)) {
+                    String query = "UPDATE " + TABLE_PERSON + " SET "
+                                   + KEY_PERSON_PASSWD + "= '" + passwd
+                                   + "' WHERE " + KEY_PERSON_ID + "= " + personId;
+
+                    stmt.execute(query);
+                    r = "Изменения сохранены";
+                }
+                else {
+                    r = "Ошибка: неправильно указан старый пароль";
+                }
+            }
+            else {
+                r = "Ошибка: некорректный айди";
+            }
+
         } catch (Exception ex) {
             ex.printStackTrace();
+            r = "Ошибка на сервере: 1";
         }
-    }
-     
-      public void updatePersonPasswordById(int personId, String passwd) {
-        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            String query = "UPDATE " + TABLE_PERSON + " SET "
-                           + KEY_PERSON_PASSWD + "= '" + passwd
-                           + "' WHERE " + KEY_PERSON_ID + "= " + personId;
-
-            Statement stmt = con.createStatement();
-            stmt.execute(query);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        return r;
     }
 
     public void updatePersonRatingById(int personId) {
@@ -955,10 +983,11 @@ public class DbHelper {
         }
         return result;
     }
-       public ArrayList<Order> getOrdersBySectionIdAndPersonId(int sId, int personId) {
+
+    public ArrayList<Order> getOrdersBySectionIdAndPersonId(int sId, int personId) {
         String query = "select * from "
-                       + TABLE_ORDERS + " where " + KEY_ORDER_SECTION_ID + " = " + sId + " and " +
-                       KEY_ORDER_CUSTOMER_ID + " = " + personId + " order by " + KEY_ORDER_CREATED_DATE + " desc";
+                       + TABLE_ORDERS + " where " + KEY_ORDER_SECTION_ID + " = " + sId + " and "
+                       + KEY_ORDER_CUSTOMER_ID + " = " + personId + " order by " + KEY_ORDER_CREATED_DATE + " desc";
 
         ArrayList<Order> result = null;
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
@@ -975,7 +1004,6 @@ public class DbHelper {
         }
         return result;
     }
-    
 
     public ArrayList<Order> getPersonOrdersById(int personId) {
         String query = "select * from "
@@ -996,8 +1024,6 @@ public class DbHelper {
         }
         return result;
     }
-    
-    
 
     public ArrayList<Order> getOrdersRecords(int start, int total) {
         ArrayList<Order> list = new ArrayList<>();
