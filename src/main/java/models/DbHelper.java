@@ -889,7 +889,11 @@ public class DbHelper {
             pstmt.setString(5, order.getDescription());
             pstmt.setLong(6, order.getDeadline());
             pstmt.setLong(7, DataUtils.getCurentDateInLong());
-            pstmt.setInt(8, 0);
+            int v =0;
+            if(order.isAnonNote()){
+            v=1;
+            }
+            pstmt.setInt(8, v);
 
             pstmt.executeUpdate();
 
@@ -915,11 +919,16 @@ public class DbHelper {
         double price = set.getDouble(KEY_ORDER_PRICE);
         String dscrp = set.getString(KEY_ORDER_DESCRIPTION);
         Long deadline = set.getLong(KEY_ORDER_DEADLINE);
-        Long createdDate
-             = set.getLong(KEY_ORDER_CREATED_DATE);
+        Long createdDate = set.getLong(KEY_ORDER_CREATED_DATE);
+        int sanon = set.getInt(KEY_ORDER_ISANONNOTE);
 
         Order order = new Order(id, title, sectionId, price, dscrp, deadline, createdDate);
         order.setCustomerId(customerId);
+        boolean b = false;
+        if(sanon ==1){
+        b =true;
+        }
+        order.setIsAnonNote(b);
         return order;
     }
 

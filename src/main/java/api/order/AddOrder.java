@@ -86,6 +86,7 @@ public class AddOrder extends HttpServlet {
             String desc = jsonObject.getString("desc");
             String deadline = jsonObject.getString("deadline");
             Long lb = Long.valueOf(deadline);
+            int sanon = jsonObject.getInt("sanon");
 
             Order order = new Order();
             order.setCustomerId(customerId);
@@ -94,6 +95,11 @@ public class AddOrder extends HttpServlet {
             order.setPrice(price);
             order.setDescription(desc);
             order.setDeadline(lb);
+            boolean b = false;
+            if(sanon == 1){
+                b = true;
+            }
+            order.setIsAnonNote(b);
 
             models.DbHelper db = new models.DbHelper();
             db.addOrder(order);

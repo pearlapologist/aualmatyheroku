@@ -106,7 +106,7 @@ public Order(){
         this.sectionId = sectionId;
     }
 
-    public boolean isIsAnonNote() {
+    public boolean isAnonNote() {
         return isAnonNote;
     }
 
