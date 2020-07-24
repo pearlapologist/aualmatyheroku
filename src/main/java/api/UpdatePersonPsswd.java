@@ -81,11 +81,12 @@ public class UpdatePersonPsswd extends HttpServlet {
             javax.json.JsonObject jsonObject = jsonReader.readObject();
 
             int id = jsonObject.getInt("id");
+            String oldpasswd = jsonObject.getString("oldpasswd");
             String psswd = jsonObject.getString("psswd");
 
             models.DbHelper db = new models.DbHelper();
 
-           String r = db.updatePersonPasswordById(id, psswd);
+           String r = db.updatePersonPasswordById(id, psswd, oldpasswd);
             if (r != null) {
                 out.print(r);
             }

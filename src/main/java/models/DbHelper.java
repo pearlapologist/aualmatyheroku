@@ -517,14 +517,14 @@ public class DbHelper {
         return r;
     }
 
-    public String updatePersonPasswordById(int personId, String passwd) {
+    public String updatePersonPasswordById(int id, String passwd, String oldpasswd) {
         String r = null;
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
 
             Statement stmt = con.createStatement();
 
-            String q2 = "select " + KEY_PERSON_PASSWD + " from persons where " + KEY_PERSON_ID + " = " + personId;
+            String q2 = "select " + KEY_PERSON_PASSWD + " from persons where " + KEY_PERSON_ID + " = " + id;
             ResultSet rs = stmt.executeQuery(q2);
             String ps = null;
             if (rs.first()) {
@@ -533,10 +533,10 @@ public class DbHelper {
             rs.close();
 
             if (ps != null) {
-                if (ps.equals(passwd)) {
+                if (ps.equals(oldpasswd)) {
                     String query = "UPDATE " + TABLE_PERSON + " SET "
                                    + KEY_PERSON_PASSWD + "= '" + passwd
-                                   + "' WHERE " + KEY_PERSON_ID + "= " + personId;
+                                   + "' WHERE " + KEY_PERSON_ID + "= " + id;
 
                     stmt.execute(query);
                     r = "Изменения сохранены";
