@@ -62,6 +62,11 @@ public class GetOrder extends HttpServlet {
         builderr.add("dealine", b);
         String c = order.getCreated_date() + "";
         builderr.add("created", c);
+        int v = 0;
+        if(order.isAnonNote()){
+        v=1;
+        }
+          builderr.add("sanon", v);
 
         javax.json.JsonObject jsonObject = builderr.build();
         out.print(jsonObject.toString());
