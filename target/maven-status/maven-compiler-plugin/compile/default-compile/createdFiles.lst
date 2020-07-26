@@ -80,6 +80,7 @@ controllers\myprofile\MyForm.class
 test\TestOrder.class
 api\getConversationAllMessages.class
 models\Notify.class
+api\UpdatePhoto.class
 api\answer\DeleteAnswer.class
 api\executor\GetExecutor.class
 api\UpdatePersonPsswd.class

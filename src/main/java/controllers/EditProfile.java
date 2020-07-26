@@ -79,7 +79,8 @@ public class EditProfile extends HttpServlet {
             return;
         }
 
-        String path = "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Aualmaty\\web\\Content"; //getServletContext().getRealPath("/Content");
+        String path = "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Aualmaty\\src\\main\\webapp\\Content"; 
+        String t2 = getServletContext().getRealPath("/Content");
 
         // Part filePart = request.getPart("file");
         if (request.getPart("editfile") != null) {

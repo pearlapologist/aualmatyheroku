@@ -438,11 +438,11 @@ public class DbHelper {
     public void updatePerson(Person person) {
         String query = "UPDATE " + TABLE_PERSON + " SET "
                        + KEY_PERSON_NAME + "=?,"
-                       + KEY_PERSON_LASTNAME + "=?,"
-                       + KEY_PERSON_PASSWD + "=?,"
-                       + KEY_PERSON_RATING + "=?,"
-                       + KEY_PERSON_NUMBER + "=?,'"
-                       + KEY_PERSON_BIRTHDAY + "'=?,"
+                       + KEY_PERSON_LASTNAME + "=?, "
+                       + KEY_PERSON_PASSWD + "=?, "
+                       + KEY_PERSON_RATING + "=?, "
+                       + KEY_PERSON_NUMBER + "=?, "
+                       + KEY_PERSON_BIRTHDAY + "=?, "
                        + KEY_PERSON_PHOTO + "=?"
                        + " WHERE " + KEY_PERSON_ID + "=" + person.getId();
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
@@ -461,6 +461,22 @@ public class DbHelper {
             pstmt.executeUpdate();
 
             con.commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updatePersonPhoto(int id, String photoname) {
+
+        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            String query = "UPDATE " + TABLE_PERSON + " SET "
+                           + KEY_PERSON_PHOTO + "= '" + photoname
+                           + "' WHERE " + KEY_PERSON_ID + "=" + id;
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -889,9 +905,9 @@ public class DbHelper {
             pstmt.setString(5, order.getDescription());
             pstmt.setLong(6, order.getDeadline());
             pstmt.setLong(7, DataUtils.getCurentDateInLong());
-            int v =0;
-            if(order.isAnonNote()){
-            v=1;
+            int v = 0;
+            if (order.isAnonNote()) {
+                v = 1;
             }
             pstmt.setInt(8, v);
 
@@ -925,8 +941,8 @@ public class DbHelper {
         Order order = new Order(id, title, sectionId, price, dscrp, deadline, createdDate);
         order.setCustomerId(customerId);
         boolean b = false;
-        if(sanon ==1){
-        b =true;
+        if (sanon == 1) {
+            b = true;
         }
         order.setIsAnonNote(b);
         return order;

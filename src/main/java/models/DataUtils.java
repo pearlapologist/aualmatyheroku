@@ -5,12 +5,15 @@
  */
 package models;
 
+import java.awt.image.*;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import javax.imageio.*;
 import javax.servlet.http.*;
+import javax.xml.bind.*;
 
 /**
  *
@@ -103,7 +106,6 @@ public class DataUtils {
     }
 
     public static void savePhoto(Part filePart, String path, String fileName) throws Exception {
-
         OutputStream out = null;
         InputStream fileContent = null;
 
@@ -132,7 +134,14 @@ public class DataUtils {
                 fileContent.close();
             }
         }
+    }
 
+    public static void savePhotoByBytes(byte[] bytes2, String path, String fileName) throws Exception {
+                // считываем полученный массив в объект BufferedImage
+		BufferedImage resultImage = ImageIO.read(new ByteArrayInputStream(bytes2));
+ 
+                // сохраняем объект BufferedImage в виде нового изображения
+		ImageIO.write(resultImage, "jpg", new File(path,fileName));
     }
 
     public static String getPersonPhotoPath(Person p) {
@@ -150,7 +159,7 @@ public class DataUtils {
         String name = imageName + ".jpg";
         boolean b = false;
         try {
-            String path = "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Test\\web\\Content";
+            String path = "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Aualmaty\\src\\main\\webapp\\Content";
 
             File file = new File(path + File.separator + name);
             b = file.delete();
