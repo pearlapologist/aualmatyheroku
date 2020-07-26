@@ -87,6 +87,8 @@ public class UpdatePhoto extends HttpServlet {
             e.printStackTrace();
         }
 
+         String path = null;
+         String fileName = null;
         try {
             models.DbHelper db = new models.DbHelper();
             javax.json.JsonReader jsonReader = javax.json.Json.createReader(request.getReader());
@@ -99,7 +101,9 @@ public class UpdatePhoto extends HttpServlet {
             String p = "src\\main\\webapp\\Content";
             String path9 = getServletContext().getRealPath("/Content");
             int position = path9.indexOf("target");
-            String path = path9.substring(0,position)+p;
+           path = path9.substring(0,position)+p;
+            
+            String o = System.getProperty("user.dir") + System.getProperty("file.separator")+ "/Content";
             
 
 
@@ -112,14 +116,16 @@ public class UpdatePhoto extends HttpServlet {
             String r2 = java.nio.file.Paths.get(myURI).toFile().toString();*/
             
 
-            String fileName = models.DataUtils.generateRandomString(15) + ".jpg";
+            fileName = models.DataUtils.generateRandomString(15) + ".jpg";
 
             models.DataUtils.savePhotoByBytes(base64Decoded, path, fileName);
 
             db.updatePersonPhoto(id, fileName);
 
-            out.print(id);
+            out.print(path + " " + fileName);
         } catch (Exception e) {
+            out.print(path + " " + fileName);
+             out.print(getServletContext().getRealPath("/Content"));
             out.print(e.getMessage());
             e.printStackTrace();
         }
