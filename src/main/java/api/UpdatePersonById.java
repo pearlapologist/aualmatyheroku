@@ -74,18 +74,13 @@ public class UpdatePersonById extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-           
+
         PrintWriter out = response.getWriter();
-         
+
         int id = -1;
         try {
             id = Integer.parseInt(request.getParameter("id"));
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
             JsonReader jsonReader = Json.createReader(request.getReader());
 
             JsonObject jsonObject = jsonReader.readObject();
@@ -94,7 +89,13 @@ public class UpdatePersonById extends HttpServlet {
             String lastname = jsonObject.getString("pLastname");
             String birthday = jsonObject.getString("pBirthday");
             Long lb = Long.valueOf(birthday);
-            //String photo = jsonObject.getString("photo");
+            String photo = jsonObject.getString("photo");
+            byte[] base64Decoded = javax.xml.bind.DatatypeConverter.parseBase64Binary(photo);
+            
+            String path = getServletContext().getRealPath("/Content");
+            String fileName = models.DataUtils.generateRandomString(15) + ".jpg";
+
+            models.DataUtils.savePhotoByBytes(base64Decoded, path, fileName);
 
             DbHelper db = new DbHelper();
 
@@ -103,9 +104,10 @@ public class UpdatePersonById extends HttpServlet {
             p.setName(name);
             p.setLastname(lastname);
             p.setBirthday(lb);
+            p.setPhoto(fileName);
 
-           db.updatePersonFromAndr(p);
-          out.print(id);
+            db.updatePersonFromAndr(p);
+            out.print(id);
         } catch (Exception e) {
             out.print("Ошибка на сервере");
             e.printStackTrace();

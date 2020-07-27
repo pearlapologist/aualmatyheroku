@@ -408,14 +408,6 @@
         <servlet-name>UpdatePersonPsswd</servlet-name>
         <servlet-class>api.UpdatePersonPsswd</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>UpdatePhoto</servlet-name>
-        <servlet-class>api.UpdatePhoto</servlet-class>
-        <init-param>
-        <param-name>uploadImagesPath</param-name>
-        <param-value>/Aualmaty/src/main/webapp/Content</param-value>
-    </init-param>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
@@ -819,10 +811,6 @@
     <servlet-mapping>
         <servlet-name>UpdatePersonPsswd</servlet-name>
         <url-pattern>/UpdatePersonPsswd</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdatePhoto</servlet-name>
-        <url-pattern>/UpdatePhoto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

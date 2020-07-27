@@ -146,6 +146,7 @@ public class DataUtils {
 
     // /app/src/main/webapp/Content
     // /app/target/tomcat.11978/webapps/expanded/Content
+    // "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Aualmaty\\src\\main\\webapp\\Content"; 
     
     public static String getPersonPhotoPath(Person p) {
         if (p.getPhoto() == null || p.getPhoto().equals("")) {

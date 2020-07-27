@@ -466,22 +466,6 @@ public class DbHelper {
         }
     }
 
-    public void updatePersonPhoto(int id, String photoname) {
-
-        try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
-            Class.forName("com.mysql.jdbc.Driver");
-            
-            String query = "UPDATE " + TABLE_PERSON + " SET "
-                           + KEY_PERSON_PHOTO + "= '" + photoname
-                           + "' WHERE " + KEY_PERSON_ID + "=" + id;
-            Statement stmt = con.createStatement();
-            stmt.execute(query);
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public void updatePersonFromAndr(Person person) {
         try (Connection con = DriverManager.getConnection(URL, DBUSER, DBPASSWORD)) {
             Class.forName("com.mysql.jdbc.Driver");
@@ -489,6 +473,7 @@ public class DbHelper {
             String query = "UPDATE " + TABLE_PERSON + " SET "
                            + KEY_PERSON_NAME + "= '" + person.getName() + "', "
                            + KEY_PERSON_LASTNAME + "= '" + person.getLastname() + "', "
+                           + KEY_PERSON_PHOTO + "= '" + person.getPhoto() + "', "
                            + KEY_PERSON_BIRTHDAY + "= " + person.getBirthday()
                            + " WHERE " + KEY_PERSON_ID + "= " + person.getId();
             Statement stmt = con.createStatement();
