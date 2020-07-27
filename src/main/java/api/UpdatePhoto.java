@@ -75,7 +75,7 @@ public class UpdatePhoto extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8"); 
+        response.setContentType("text/html;charset=UTF-8");
 
         PrintWriter out = response.getWriter();
 
@@ -87,8 +87,8 @@ public class UpdatePhoto extends HttpServlet {
             e.printStackTrace();
         }
 
-         String path = null;
-         String fileName = null;
+        String path = null;
+        String fileName = null;
         try {
             models.DbHelper db = new models.DbHelper();
             javax.json.JsonReader jsonReader = javax.json.Json.createReader(request.getReader());
@@ -98,24 +98,20 @@ public class UpdatePhoto extends HttpServlet {
             String photo = jsonObject.getString("photo");
             byte[] base64Decoded = DatatypeConverter.parseBase64Binary(photo);
             // "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Aualmaty\\src\\main\\webapp\\Content"; 
-            String p = "src\\main\\webapp\\Content";
+            String p = "src/main/webapp/Content";
             String path9 = getServletContext().getRealPath("/Content");
             int position = path9.indexOf("target");
-           path = path9.substring(0,position)+p;
-            
-            String o = System.getProperty("user.dir") + System.getProperty("file.separator")+ "/Content";
-            
+            path = path9.substring(0, position) + p;
 
+            String o = System.getProperty("user.dir") + System.getProperty("file.separator") + "/Content";
 
-         /*   URL myURL = getClass().getProtectionDomain().getCodeSource().getLocation();
+            /*   URL myURL = getClass().getProtectionDomain().getCodeSource().getLocation();
             java.net.URI myURI = null;
             try {
                 myURI = myURL.toURI();
             } catch (URISyntaxException e1) {
             }
             String r2 = java.nio.file.Paths.get(myURI).toFile().toString();*/
-            
-
             fileName = models.DataUtils.generateRandomString(15) + ".jpg";
 
             models.DataUtils.savePhotoByBytes(base64Decoded, path, fileName);
@@ -125,7 +121,7 @@ public class UpdatePhoto extends HttpServlet {
             out.print(path + " " + fileName);
         } catch (Exception e) {
             out.print(path + " " + fileName);
-             out.print(getServletContext().getRealPath("/Content"));
+            out.print(getServletContext().getRealPath("/Content"));
             out.print(e.getMessage());
             e.printStackTrace();
         }
