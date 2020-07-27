@@ -144,6 +144,9 @@ public class DataUtils {
 		ImageIO.write(resultImage, "jpg", new File(path,fileName));
     }
 
+    // /app/src/main/webapp/Content
+    // /app/target/tomcat.11978/webapps/expanded/Content
+    
     public static String getPersonPhotoPath(Person p) {
         if (p.getPhoto() == null || p.getPhoto().equals("")) {
             return "Content/executors_default_image.png";

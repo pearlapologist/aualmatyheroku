@@ -98,35 +98,22 @@ public class UpdatePhoto extends HttpServlet {
             String photo = jsonObject.getString("photo");
             byte[] base64Decoded = DatatypeConverter.parseBase64Binary(photo);
             // "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Aualmaty\\src\\main\\webapp\\Content"; 
-          //  String p = "src/main/webapp/Content";
             path = getServletContext().getRealPath("/Content");
           //  int position = path9.indexOf("target");
            // path = path9.substring(0, position) + p;
-
-            String o = System.getProperty("user.dir") + System.getProperty("file.separator") + "/Content";
-
-            /*   URL myURL = getClass().getProtectionDomain().getCodeSource().getLocation();
-            java.net.URI myURI = null;
-            try {
-                myURI = myURL.toURI();
-            } catch (URISyntaxException e1) {
-            }
-            String r2 = java.nio.file.Paths.get(myURI).toFile().toString();*/
+            
             fileName = models.DataUtils.generateRandomString(15) + ".jpg";
 
             models.DataUtils.savePhotoByBytes(base64Decoded, path, fileName);
 
             db.updatePersonPhoto(id, fileName);
             
-            out.print(id);
+            out.print(id + ";;");
         } catch (Exception e) {
-            out.print(getServletContext().getRealPath("/Content") + " ;; ");
-
             out.print(e.getMessage());
             e.printStackTrace();
         }
         out.print(path + " " + fileName);
-        out.print(System.getProperty("file.separator"));
     }
 
     /**
