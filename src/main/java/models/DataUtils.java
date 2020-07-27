@@ -150,7 +150,7 @@ public class DataUtils {
 
         }
         else {
-            return "/app/src/main/webapp/Content/" + p.getPhoto();
+            return "Content/" + p.getPhoto();
 
         }
     }

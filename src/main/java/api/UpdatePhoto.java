@@ -98,10 +98,10 @@ public class UpdatePhoto extends HttpServlet {
             String photo = jsonObject.getString("photo");
             byte[] base64Decoded = DatatypeConverter.parseBase64Binary(photo);
             // "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Aualmaty\\src\\main\\webapp\\Content"; 
-            String p = "src/main/webapp/Content";
-            String path9 = getServletContext().getRealPath("/Content");
-            int position = path9.indexOf("target");
-            path = path9.substring(0, position) + p;
+          //  String p = "src/main/webapp/Content";
+            path = getServletContext().getRealPath("/Content");
+          //  int position = path9.indexOf("target");
+           // path = path9.substring(0, position) + p;
 
             String o = System.getProperty("user.dir") + System.getProperty("file.separator") + "/Content";
 
