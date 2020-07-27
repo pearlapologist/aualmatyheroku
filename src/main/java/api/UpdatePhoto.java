@@ -117,14 +117,16 @@ public class UpdatePhoto extends HttpServlet {
             models.DataUtils.savePhotoByBytes(base64Decoded, path, fileName);
 
             db.updatePersonPhoto(id, fileName);
-
-            out.print(path + " " + fileName);
+            
+            out.print(id);
         } catch (Exception e) {
-            out.print(path + " " + fileName);
-            out.print(getServletContext().getRealPath("/Content"));
+            out.print(getServletContext().getRealPath("/Content") + " ;; ");
+
             out.print(e.getMessage());
             e.printStackTrace();
         }
+        out.print(path + " " + fileName);
+        out.print(System.getProperty("file.separator"));
     }
 
     /**
