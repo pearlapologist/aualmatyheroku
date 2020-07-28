@@ -137,17 +137,32 @@ public class DataUtils {
     }
 
     public static void savePhotoByBytes(byte[] bytes2, String path, String fileName) throws Exception {
-                // считываем полученный массив в объект BufferedImage
-		BufferedImage resultImage = ImageIO.read(new ByteArrayInputStream(bytes2));
- 
-                // сохраняем объект BufferedImage в виде нового изображения
-		ImageIO.write(resultImage, "jpg", new File(path,fileName));
+        // считываем полученный массив в объект BufferedImage
+        BufferedImage resultImage = ImageIO.read(new ByteArrayInputStream(bytes2));
+
+        // сохраняем объект BufferedImage в виде нового изображения
+        ImageIO.write(resultImage, "jpg", new File(path, fileName));
+    }
+
+    public static byte[] getPhotoByName(String path, String fileName) throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(1000);
+        BufferedImage image = ImageIO.read(new File(path, fileName));
+
+        // явно указываем расширение файла для простоты реализации
+        ImageIO.write(image, "jpg", baos);
+        baos.flush();
+
+        String base64String = DatatypeConverter.printBase64Binary(baos.toByteArray());
+        baos.close();
+
+        // декодируем полученную строку в массив байт
+        byte[] resByteArray = DatatypeConverter.parseBase64Binary(base64String);
+        return  resByteArray;
     }
 
     // /app/src/main/webapp/Content
     // /app/target/tomcat.11978/webapps/expanded/Content
     // "C:\\Users\\bayan\\OneDrive\\Документы\\NetBeansProjects\\Aualmaty\\src\\main\\webapp\\Content"; 
-    
     public static String getPersonPhotoPath(Person p) {
         if (p.getPhoto() == null || p.getPhoto().equals("")) {
             return "Content/executors_default_image.png";

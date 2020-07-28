@@ -3,7 +3,6 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\T
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\DbHelper.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\DeletePersonById.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\executor\AddExecutor.java
-C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\UpdatePhoto.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestAddService.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\models\Order_search.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestDeleteImage.java
@@ -87,8 +86,6 @@ C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\no
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\com\mycompany\aualmaty\resources\JavaEE8Resource.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\response\DeleteResponse.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\test\TestAddExecutorr.java
-C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\TestAddPerson.java
-C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\UpdatePersonRatingById.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\bookmark\PutExecutorInPersonBookmarks.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\order\GetOrder.java
 C:\Users\bayan\OneDrive\Документы\NetBeansProjects\Aualmaty\src\main\java\api\section\GetSection.java

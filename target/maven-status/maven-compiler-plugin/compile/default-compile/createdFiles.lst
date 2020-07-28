@@ -52,7 +52,6 @@ api\GetCustomerIdByOrderId.class
 api\executor\GetAllExecutors.class
 api\response\GetOrderResponsesById.class
 api\GetPersonRatingById.class
-api\TestAddPerson.class
 api\DeletePersonById.class
 api\GetExecutorIdByPersonId.class
 api\notify\GetCountOfPersonNewNotifies.class
@@ -80,7 +79,6 @@ controllers\myprofile\MyForm.class
 test\TestOrder.class
 api\getConversationAllMessages.class
 models\Notify.class
-api\UpdatePhoto.class
 api\answer\DeleteAnswer.class
 api\executor\GetExecutor.class
 api\UpdatePersonPsswd.class
@@ -110,7 +108,6 @@ controllers\myprofile\AddService.class
 api\SetPersonIsExecutorField.class
 controllers\Quiziz.class
 controllers\NewResponse.class
-api\UpdatePersonRatingById.class
 test\TestAllExecutors.class
 controllers\questions\QuestionAdd.class
 api\order\DeleteOrder.class

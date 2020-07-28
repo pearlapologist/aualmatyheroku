@@ -32,7 +32,7 @@ public class AddPerson extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,25 +63,31 @@ public class AddPerson extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-           JsonReader jsonReader = Json.createReader(request.getReader());
+            JsonReader jsonReader = Json.createReader(request.getReader());
 
             JsonObject jsonObject = jsonReader.readObject();
 
-           String name = jsonObject.getString("name");
+            String name = jsonObject.getString("name");
             String lastname = jsonObject.getString("lastname");
             String number = jsonObject.getString("numb");
             String passwd = jsonObject.getString("passwd");
             String birthday = jsonObject.getString("birth");
             Long lb = Long.valueOf(birthday);
-            
+            String photo = jsonObject.getString("photo");
+            byte[] base64Decoded = javax.xml.bind.DatatypeConverter.parseBase64Binary(photo);
 
-          Person p = new Person();
+            String path = getServletContext().getRealPath("/Content");
+            String fileName = models.DataUtils.generateRandomString(15) + ".jpg";
+
+            models.DataUtils.savePhotoByBytes(base64Decoded, path, fileName);
+
+            Person p = new Person();
             p.setName(name);
             p.setLastname(lastname);
             p.setNumber(number);
             p.setPasswd(passwd);
             p.setBirthday(lb);
-          
+            p.setPhoto(fileName);
 
             models.DbHelper db = new models.DbHelper();
             db.addPerson(p);
