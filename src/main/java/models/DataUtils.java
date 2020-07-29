@@ -151,13 +151,15 @@ public class DataUtils {
         // явно указываем расширение файла для простоты реализации
         ImageIO.write(image, "jpg", baos);
         baos.flush();
-
+/*
         String base64String = DatatypeConverter.printBase64Binary(baos.toByteArray());
         baos.close();
 
         // декодируем полученную строку в массив байт
         byte[] resByteArray = DatatypeConverter.parseBase64Binary(base64String);
-        return  resByteArray;
+        return  resByteArray;*/
+  return baos.toByteArray();
+        
     }
 
     // /app/src/main/webapp/Content
